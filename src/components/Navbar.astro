@@ -1,0 +1,58 @@
+---
+import Image from "astro/components/Image.astro";
+import logo from "../../public/logo.webp";
+
+const routes = [
+  { name: "Home", path: "/home" },
+  { name: "Photo Dump", path: "/photos" },
+  { name: "Capsule Letters", path: "/capsule" },
+  // { name: "Music", path: "/music" },
+  { name: "Daily Phrase", path: "/daily" },
+];
+
+const langs = [
+  { name: "EN", code: "en" },
+  { name: "JP", code: "jp" },
+  { name: "ES", code: "es" },
+];
+
+---
+
+<nav class="border-b border-neutral-200 flex justify-between">
+  <ul class="flex items-center justify-start gap-6 px-4 py-3">
+    <li
+      class="flex items-center gap-2 text-lg noto-serif-jp font-medium text-[#805C5C]"
+    >
+      <Image src={logo} alt="Logo" class="w-12 h-12 object-cover" />
+      <span>Natsu Ni Aou</span>
+    </li>
+    {
+      routes.map((route) => (
+        <li key={route.path} class="text-sm font-medium text-neutral-600">
+          <a href={route.path} class="hover:text-neutral-900 transition-colors">
+            {route.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="flex gap-2 items-center">
+    <div id="langs">
+      {
+        langs.map((lang) => (
+          <button class="px-3 py-1 text-sm font-medium text-neutral-600 border border-neutral-300 rounded hover:bg-neutral-100 transition-colors">
+            {lang.name}
+          </button>
+        ))
+      }
+    </div>
+    <div id="moods">
+      <button class="px-3 py-1 text-sm font-medium text-neutral-600 border border-neutral-300 rounded hover:bg-neutral-100 transition-colors">
+        🌞
+      </button>
+      <button class="px-3 py-1 text-sm font-medium text-neutral-600 border border-neutral-300 rounded hover:bg-neutral-100 transition-colors">
+        🌜
+      </button>
+    </div>
+  </div>
+</nav>

@@ -67,3 +67,64 @@
 .ku-dance {
   animation: dance 1s ease-in-out infinite;
 }
+
+@keyframes lineFlow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.animate-draw-line {
+  stroke-dasharray: 5;
+  animation: lineFlow 1s linear infinite;
+}
+
+/* Weather Icons */
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+}
+
+@keyframes flash {
+  0%, 90%, 100% { opacity: 1; filter: brightness(1); }
+  92%, 95% { opacity: 0.8; filter: brightness(2.3); }
+}
+
+@keyframes rain-drop {
+  0%, 100% { transform: translateY(-2px); opacity: 1; }
+  70% { transform: translateY(3px); }
+}
+
+.animate-sun { animation: slow-spin 25s linear infinite; }
+.animate-cloud { animation: drift 4s ease-in-out infinite; }
+.animate-lightning { animation: flash 4s steps(4) infinite, rain-drop 2s infinite ease-in-out; }
+.animate-rain { animation: rain-drop 2s infinite ease-in-out; }
+
+/* Heart */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+.animate-heartbeat {
+  display: inline-block; 
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
