@@ -1,0 +1,23 @@
+---
+const showModal = (msg, emoji, callback) => {
+  $("#modal-message").text(msg);
+  $("#modal-icon").text(emoji);
+  $("#custom-modal").removeClass("hidden").addClass("flex");
+  
+  // Esperamos 2 segundos y ejecutamos la acción (como redirigir)
+  setTimeout(() => {
+    $("#custom-modal").addClass("hidden");
+    if (callback) callback();
+  }, 2000);
+};
+
+// Uso en el login:
+if (secretPassword === "123") {
+  const name = selectedUser === "sa" ? "Sa-chan" : "Ku-chan";
+  localStorage.setItem('user_session', name);
+  
+  showModal(`Welcome home, ${name}!`, "✨🌸", () => {
+    window.location.href = "/home";
+  });
+}
+---

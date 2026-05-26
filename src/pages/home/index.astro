@@ -3,30 +3,186 @@ import Layout from "../../layouts/Layout.astro";
 // import Card from "../../components/Card.astro";
 
 // import cards from "../data/cards.json";
+
+// > Styles const
+const perspectiveCardStyle =
+  "flex flex-col items-center gap-1 p-6 rounded-lg shadow-inner bg-stone-50 border border-stone-200/60";
+const perspectiveTimeStyle =
+  "text-3xl text-black-ink font-inter tracking-wider font-normal";
+const perspectiveDescStyle =
+  "text-sm text-ku-brown font-noto-sans-jp tracking-wide";
 ---
 
 <!-- flex flex-col items-center justify-center min-h-screen -->
 <Layout style="bg-[#F8F8F3]">
-  <h1>This is index page</h1>
-  <!-- <Card
-    title="My Title"
-    description="Veniam ad eiusmod in elit ad sunt ipsum."
-  /> -->
-  <!-- <div class="grid grid-cols-5 gap-3 px-6 mb-6">
-    {
-      cards.map((card) => (
-        <Card title={card.title} description={card.description} />
-      ))
-    }
-  </div> -->
+  <!-- > Main Countdown -->
+  <header>
+    <h3
+      id="salute"
+      class="text-left noto-serif-jp text-2xl font-normal text-ku-brown mt-5"
+    >
+    </h3>
+    <h1 class="text-center noto-serif-jp text-4xl font-normal text-ku-brown">
+      Time for Reuniting
+    </h1>
+    <div id="countdown-container" class="flex flex-col items-center my-6">
+      <div
+        class="flex items-center gap-2 roboto-mono text-5xl font-light text-neutral-600"
+      >
+        <span id="cd-months" class="text-ku-brown">00</span>
+        <span class="text-neutral-400 text-4xl">:</span>
+        <span id="cd-weeks" class="text-ku-brown">00</span>
+        <span class="text-neutral-400 text-4xl">:</span>
+        <span id="cd-days" class="text-ku-brown">00</span>
+        <span class="text-neutral-400 text-4xl">:</span>
+        <span id="cd-hours" class="text-ku-brown">00</span>
+        <span class="text-neutral-400 text-4xl">:</span>
+        <span id="cd-minutes" class="text-ku-brown">00</span>
+        <span class="text-neutral-400 text-4xl">:</span>
+        <span id="cd-seconds" class="text-ku-brown">00</span>
+      </div>
 
-	<!-- <button id="btnId">Click me</button> -->
+      <div
+        class="flex justify-center gap-12 w-full max-w-xl px-2 mt-2 text-sm font-normal text-neutral-400 tracking-wide noto-sans-jp"
+      >
+        <span class="w-12 text-center">Months</span>
+        <span class="w-12 text-center">Weeks</span>
+        <span class="w-12 text-center">Days</span>
+        <span class="w-12 text-center">Hours</span>
+        <span class="w-12 text-center">Minutes</span>
+        <span class="w-12 text-center">Seconds</span>
+      </div>
+    </div>
+  </header>
+  <main class="flex flex-col gap-10">
+    <!-- > Time perspectives -->
+    <section id="time-perspectives">
+      <h2>Time perspectives</h2>
+      <div
+        id="time-perspectives-container"
+        class="flex items-center justify-center gap-6"
+      >
+        <div id="week-perspective" class={perspectiveCardStyle}>
+          <p class={perspectiveTimeStyle}>10</p>
+          <p class={perspectiveDescStyle}>Weeks in total</p>
+        </div>
+        <div id="days-perspective" class={perspectiveCardStyle}>
+          <p class={perspectiveTimeStyle}>72</p>
+          <p class={perspectiveDescStyle}>Days in total</p>
+        </div>
+        <div id="hours-perspective" class={perspectiveCardStyle}>
+          <p class={perspectiveTimeStyle}>1,731</p>
+          <p class={perspectiveDescStyle}>Hours in total</p>
+        </div>
+        <div id="minutes-perspective" class={perspectiveCardStyle}>
+          <p class={perspectiveTimeStyle}>103,876</p>
+          <p class={perspectiveDescStyle}>Hours in total</p>
+        </div>
+        <div id="seconds-perspective" class={perspectiveCardStyle}>
+          <p class={perspectiveTimeStyle}>6,232,555</p>
+          <p class={perspectiveDescStyle}>Seconds in total</p>
+        </div>
+      </div>
+    </section>
+    <!-- > Journey together -->
+    <section id="journey-together">
+      <h2>Our journey together</h2>
+      <!-- <div id="journey-together-container" class="flex items-center justify-center ">
+        <p class="text-lg text-black-ink font-noto-sans-jp tracking-wide font-light">A place where time stands still for us</p>
+      </div> -->
+    </section>
+  </main>
 </Layout>
 
 <script>
-	// import $ from "jquery";
+  import $ from "jquery";
+  const userName = localStorage.getItem("user_session");
+  const hour = new Date().getHours();
+  const salute =
+    hour > 12 && hour < 18
+      ? `Good Afternoon, ${userName}!`
+      : hour >= 18 || hour <= 21
+        ? `Good Evening, ${userName}!`
+        : hour >= 22 || hour <= 5
+          ? `Good Night, ${userName}!`
+          : `Good Morning, ${userName}!`;
 
-	// $('#btnId').on('click', function() {
-	// 	alert('Button clicked!');
-	// });
+  // ---------------------------------------------------------------------
+  // 3 de Agosto de 2026, 19:45 de Vancouver -> 4 de Agosto, 02:45 UTC
+  const targetDate = new Date(Date.UTC(2026, 7, 4, 2, 45, 0));
+
+  function getVancouverTime(date: Date) {
+    return new Date(
+      date.toLocaleString("en-US", { timeZone: "America/Vancouver" }),
+    );
+  }
+
+  function updateCountdown() {
+    const nowVancouver = getVancouverTime(new Date());
+    const targetVancouver = getVancouverTime(targetDate);
+
+    let difference = targetVancouver.getTime() - nowVancouver.getTime();
+
+    if (difference <= 0) {
+      $("#countdown-container").html(
+        "<p class='text-2xl font-light text-[#805C5C] animate-heartbeat'>¡Llegó el momento! ❤️</p>",
+      );
+      return;
+    }
+
+    // --- CÁLCULO DE MESES REALES ---
+    let months =
+      (targetVancouver.getFullYear() - nowVancouver.getFullYear()) * 12 +
+      (targetVancouver.getMonth() - nowVancouver.getMonth());
+
+    // Clonamos la fecha actual para simular el avance de los meses pasados
+    let checkDate = new Date(nowVancouver);
+    checkDate.setMonth(checkDate.getMonth() + months);
+
+    // Si al sumar los meses nos pasamos del día objetivo, restamos un mes
+    if (checkDate > targetVancouver) {
+      months--;
+      checkDate = new Date(nowVancouver);
+      checkDate.setMonth(checkDate.getMonth() + months);
+    }
+
+    // El tiempo restante tras quitar los meses exactos
+    let remainingTime = targetVancouver.getTime() - checkDate.getTime();
+
+    // --- CÁLCULO DE SEMANAS, DÍAS Y HORAS ---
+    const msInWeek = 1000 * 60 * 60 * 24 * 7;
+    const msInDay = 1000 * 60 * 60 * 24;
+    const msInHour = 1000 * 60 * 60;
+    const msInMinute = 1000 * 60;
+
+    const weeks = Math.floor(remainingTime / msInWeek);
+    remainingTime %= msInWeek;
+
+    const days = Math.floor(remainingTime / msInDay);
+    remainingTime %= msInDay;
+
+    const hours = Math.floor(remainingTime / msInHour);
+    remainingTime %= msInHour;
+
+    const minutes = Math.floor(remainingTime / msInMinute);
+    remainingTime %= msInMinute;
+
+    const seconds = Math.floor(remainingTime / 1000);
+
+    // --- INYECCIÓN CON JQUERY ---
+    $("#cd-months").text(String(months).padStart(2, "0"));
+    $("#cd-weeks").text(String(weeks).padStart(2, "0"));
+    $("#cd-days").text(String(days).padStart(2, "0"));
+    $("#cd-hours").text(String(hours).padStart(2, "0"));
+    $("#cd-minutes").text(String(minutes).padStart(2, "0"));
+    $("#cd-seconds").text(String(seconds).padStart(2, "0"));
+
+    $("#countdown-container").removeClass("hidden");
+  }
+
+  $(document).ready(function () {
+    $("#salute").text(salute);
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  });
 </script>

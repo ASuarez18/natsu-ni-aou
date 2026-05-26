@@ -65,7 +65,7 @@ const kuWeatherClass = getWeatherClass(vancouverData?.weather[0]?.id ?? 404);
 // ? Class names
 const nameWeatherContainer = "flex w-full gap-8 items-center justify-around";
 const headerLocation =
-  "font-light noto-sans-jp text-[#805C5C] text-3xl tracking-wide";
+  "font-light noto-sans-jp text-ku-brown text-3xl tracking-wide";
 const locationText = "text-base font-medium text-neutral-600";
 const timeContainer = "flex flex-col items-center mt-2";
 const hourText =
@@ -93,7 +93,7 @@ const dateText =
         <!-- ? Weather Icon -->
         <div>
           <SaIcon
-            class=`text-[#805C5C] ${saWeatherClass}`
+            class=`text-ku-brown ${saWeatherClass}`
             stroke-width={1}
             size={42}
           />
@@ -159,7 +159,7 @@ const dateText =
         <!-- ? Weather Icon -->
         <div>
           <KuIcon
-            class=`text-[#805C5C] ${kuWeatherClass}`
+            class=`text-ku-brown ${kuWeatherClass}`
             stroke-width={1}
             size={42}
           />
@@ -179,11 +179,11 @@ const dateText =
       </div>
     </div>
   </div>
-  <quote class="px-6 noto-serif-jp text-center text-md italic text-[#2D2926] border-l-3 rounded-xs border-[#805C5C] pl-2">
+  <quote class="px-6 noto-serif-jp text-center text-md italic text-black-ink border-l-3 rounded-xs border-ku-brown pl-2">
     "Distance is nothing with the type of love we have. We are always together,
     no matter where we are."
   </quote>
-  <p class="px-6 text-md text-[#2D2926] noto-sans-jp font-light">
+  <p class="px-6 text-md text-black-ink noto-sans-jp font-light">
     Done with <span class="animate-heartbeat">❤️</span> by Ku-chan for Sa-chan — &copy;{new Date().getFullYear()}
   </p>
 </footer>

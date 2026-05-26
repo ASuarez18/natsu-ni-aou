@@ -79,15 +79,21 @@ const buttonHoverStyle =
         class="w-full py-3 rounded-xl noto-serif-jp text-lg mt-6 border-2 text-[#805C5C] border-[#E5E5E5] bg-transparent hover:bg-[#F3F6C7] hover:border-[#F3F6C7] shadow hover:cursor-pointer hover:scale-105 transition-all hover:font-semibold ease-in-out duration-300"
         >Enter our world</button
       >
-    <!-- <p>A place where time stands still for us</p> -->
+      <!-- <p>A place where time stands still for us</p> -->
     </div>
   </body>
   <script>
     import $ from "jquery";
-    let selectedUser: string = '';
-    let secretPassword: string = '';
+    let selectedUser: string = "";
+    let secretPassword: string = "";
 
     $(document).ready(function () {
+      const savedUser = localStorage.getItem("user_session");
+      if (savedUser) { // User has a saved session, redirect to home
+        window.location.href = "/home";
+        return;
+      }
+
       const saBtn = $("#sa-btn");
       const kuBtn = $("#ku-btn");
       const saEmoji = $("#sakura-emoji");
@@ -128,6 +134,9 @@ const buttonHoverStyle =
         secretPassword = $("#secret-password-inp").val();
 
         if (secretPassword === "123") {
+          const name = selectedUser === "sa" ? "Sa-chan" : "Ku-chan";
+          localStorage.setItem('user_session', name);
+          // TODO: Change alert to a custom modal with better design with time to read the message and a cute design
           alert(
             "Welcome, " +
               (selectedUser === "sa" ? "Sa-chan" : "Ku-chan") +
@@ -135,6 +144,7 @@ const buttonHoverStyle =
           );
           window.location.href = "/home";
         } else {
+          // TODO: Change alert to a custom modal 
           alert("Esa no es nuestra respuesta secreta... 🌸🐻");
         }
       });
