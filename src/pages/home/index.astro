@@ -1,16 +1,36 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import {
+  DoorOpen,
+  Dessert,
+  CakeSlice,
+  BookHeart,
+  HandHeart,
+  Heart,
+  Cake,
+} from "@lucide/astro";
 // import Card from "../../components/Card.astro";
 
 // import cards from "../data/cards.json";
 
 // > Styles const
+// ? Perspectives
 const perspectiveCardStyle =
-  "flex flex-col items-center gap-1 p-6 rounded-lg shadow-inner bg-stone-60 border border-stone-200/60";
+  "flex flex-col items-center bg-white gap-1 p-6 rounded-lg shadow-inner bg-stone-60 border border-stone-200/60";
 const perspectiveTimeStyle =
   "text-3xl text-black-ink font-inter tracking-wider font-normal";
 const perspectiveDescStyle =
   "text-sm text-ku-brown font-noto-sans-jp tracking-wide";
+// ? Journey together
+const journeyCardStyle =
+  "px-6 py-5 shadow-inner rounded-lg bg-stone-60 border bg-white border-stone-200/60 flex gap-2 items-center";
+const journeyIconStyle = "bg-ku-accent/10 p-2 rounded-full";
+const journeyTitleStyle =
+  "text-lg font-noto-sans-jp font-medium text-black-ink tracking-wider";
+const journeyDateStyle =
+  "text-sm font-noto-sans-jp text-ku-brown tracking-wide";
+const journeyDaysAgoStyle = "font-noto-sans-jp text-black-ink/70";
+const journeySpecialText = "font-semibold text-black-ink/80";
 ---
 
 <!-- flex flex-col items-center justify-center min-h-screen -->
@@ -22,7 +42,9 @@ const perspectiveDescStyle =
       class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4"
     >
     </h3>
-    <h1 class="text-center font-noto-serif-jp text-4xl font-normal text-ku-brown">
+    <h1
+      class="text-center font-noto-serif-jp text-4xl font-normal text-ku-brown"
+    >
       Time for Reuniting
     </h1>
     <div id="countdown-container" class="flex flex-col items-center my-6">
@@ -57,7 +79,11 @@ const perspectiveDescStyle =
   <main class="flex flex-col gap-10">
     <!-- > Time perspectives -->
     <section id="time-perspectives">
-      <h2 class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4">Time perspectives</h2>
+      <h2
+        class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4"
+      >
+        Time perspectives
+      </h2>
       <div
         id="time-perspectives-container"
         class="flex items-center justify-center gap-6"
@@ -76,7 +102,7 @@ const perspectiveDescStyle =
         </div>
         <div id="minutes-perspective" class={perspectiveCardStyle}>
           <p class={perspectiveTimeStyle}></p>
-          <p class={perspectiveDescStyle}>Hours in total</p>
+          <p class={perspectiveDescStyle}>Minutes in total</p>
         </div>
         <div id="seconds-perspective" class={perspectiveCardStyle}>
           <p class={perspectiveTimeStyle}></p>
@@ -86,8 +112,61 @@ const perspectiveDescStyle =
     </section>
     <!-- > Journey together -->
     <section id="journey-together">
-      <h2 class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4">Our journey together</h2>
-      
+      <h2
+        class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4"
+      >
+        Our journey together
+      </h2>
+      <div
+        id="journeys-container"
+        class="flex items-center justify-center gap-6 w-full px-4"
+      >
+        <!-- - First Met  -->
+        <div id="first-met" class={journeyCardStyle}>
+          <div class={journeyIconStyle}>
+            <DoorOpen size={48} stroke-width={1} class="text-ku-brown" />
+          </div>
+          <div>
+            <h4 class={journeyTitleStyle}>First met</h4>
+            <p class={journeyDateStyle}>24 January, 2026</p>
+            <p class={journeyDaysAgoStyle}>
+              <span id="met-days" class={journeySpecialText}>
+                10</span
+              > days ago
+            </p>
+          </div>
+        </div>
+        <!-- - First Step  -->
+        <div id="first-step" class={journeyCardStyle}>
+          <div class={journeyIconStyle}>
+            <Dessert size={48} stroke-width={1} class="text-ku-brown" />
+          </div>
+          <div>
+            <h4 class={journeyTitleStyle}>First Step</h4>
+            <p class={journeyDateStyle}>13 February, 2026</p>
+            <p class={journeyDaysAgoStyle}>
+              <span id="step-days" class={journeySpecialText}>
+                </span
+              > days ago
+            </p>
+          </div>
+        </div>
+        <!-- - official  -->
+        <div id="official" class={journeyCardStyle}>
+          <div class={journeyIconStyle}>
+            <HandHeart size={48} stroke-width={1} class="text-ku-brown" />
+          </div>
+          <div>
+            <h4 class={journeyTitleStyle}>Official</h4>
+            <p class={journeyDateStyle}>25 February, 2026</p>
+            <p class={journeyDaysAgoStyle}>
+              <span id="official-days" class={journeySpecialText}>
+                </span
+              > days ago
+            </p>
+          </div>
+        </div>
+      </div>
       <!-- <div id="journey-together-container" class="flex items-center justify-center ">
         <p class="text-lg text-black-ink font-noto-sans-jp tracking-wide font-light">A place where time stands still for us</p>
       </div> -->
@@ -99,18 +178,14 @@ const perspectiveDescStyle =
   import $ from "jquery";
   const userName = localStorage.getItem("user_session");
   const hour = new Date().getHours();
-  const salute =
-    hour > 12 && hour < 18
-      ? `Good Afternoon, ${userName}!`
-      : hour >= 18 || hour <= 21
-        ? `Good Evening, ${userName}!`
-        : hour >= 22 || hour <= 5
-          ? `Good Night, ${userName}!`
-          : `Good Morning, ${userName}!`;
+  let salute = `Good Morning, ${userName}!`;
+  if (hour >= 12 && hour < 18) salute = `Good Afternoon, ${userName}!`;
+  else if (hour >= 18 && hour < 22) salute = `Good Evening, ${userName}!`;
+  else if (hour >= 22 || hour < 6) salute = `Good Night, ${userName}!`;
 
   // ---------------------------------------------------------------------
   // 3 de Agosto de 2026, 19:45 de Vancouver -> 4 de Agosto, 02:45 UTC
-  const targetDate = new Date(Date.UTC(2026, 7, 4, 2, 45, 0));
+  const targetDate = new Date(Date.UTC(2026, 7, 4, 2, 45, 0)); // 5 - 4
 
   function getVancouverTime(date: Date) {
     return new Date(
@@ -184,7 +259,9 @@ const perspectiveDescStyle =
   function updateTimePerspectives() {
     const nowVancouver = getVancouverTime(new Date());
     const targetVancouver = getVancouverTime(targetDate);
-    const totalSeconds = Math.floor((targetVancouver.getTime() - nowVancouver.getTime()) / 1000);
+    const totalSeconds = Math.floor(
+      (targetVancouver.getTime() - nowVancouver.getTime()) / 1000,
+    );
 
     const totalMinutes = Math.floor(totalSeconds / 60);
     const totalHours = Math.floor(totalMinutes / 60);
@@ -199,10 +276,21 @@ const perspectiveDescStyle =
     console.log("clcick");
   }
 
+  function getJourneyDaysAgo(targetId: string, targetDate: Date) {
+    const nowVancouver = getVancouverTime(new Date());
+    const targetVancouver = getVancouverTime(targetDate);
+    const diffTime = Math.abs(targetVancouver.getTime() - nowVancouver.getTime());
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    $(`#${targetId}`).text(diffDays);
+  }
+
   $(document).ready(function () {
     $("#salute").text(salute);
     updateCountdown();
     updateTimePerspectives();
+    getJourneyDaysAgo("met-days", new Date(2026, 0, 24)); // 24 Jan 2026
+    getJourneyDaysAgo("step-days", new Date(2026, 1, 13)); // 13 Feb 2026
+    getJourneyDaysAgo("official-days", new Date(2026, 1, 25)); // 25 Feb 2026
     setInterval(updateCountdown, 1000);
     setInterval(updateTimePerspectives, 1000); // Actualiza las perspectivas cada minuto
   });
