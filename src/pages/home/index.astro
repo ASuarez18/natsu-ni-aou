@@ -6,7 +6,7 @@ import Layout from "../../layouts/Layout.astro";
 
 // > Styles const
 const perspectiveCardStyle =
-  "flex flex-col items-center gap-1 p-6 rounded-lg shadow-inner bg-stone-50 border border-stone-200/60";
+  "flex flex-col items-center gap-1 p-6 rounded-lg shadow-inner bg-stone-60 border border-stone-200/60";
 const perspectiveTimeStyle =
   "text-3xl text-black-ink font-inter tracking-wider font-normal";
 const perspectiveDescStyle =
@@ -19,15 +19,15 @@ const perspectiveDescStyle =
   <header>
     <h3
       id="salute"
-      class="text-left noto-serif-jp text-2xl font-normal text-ku-brown mt-5"
+      class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4"
     >
     </h3>
-    <h1 class="text-center noto-serif-jp text-4xl font-normal text-ku-brown">
+    <h1 class="text-center font-noto-serif-jp text-4xl font-normal text-ku-brown">
       Time for Reuniting
     </h1>
     <div id="countdown-container" class="flex flex-col items-center my-6">
       <div
-        class="flex items-center gap-2 roboto-mono text-5xl font-light text-neutral-600"
+        class="flex items-center gap-2 font-roboto-mono text-5xl font-light text-neutral-600"
       >
         <span id="cd-months" class="text-ku-brown">00</span>
         <span class="text-neutral-400 text-4xl">:</span>
@@ -57,36 +57,37 @@ const perspectiveDescStyle =
   <main class="flex flex-col gap-10">
     <!-- > Time perspectives -->
     <section id="time-perspectives">
-      <h2>Time perspectives</h2>
+      <h2 class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4">Time perspectives</h2>
       <div
         id="time-perspectives-container"
         class="flex items-center justify-center gap-6"
       >
         <div id="week-perspective" class={perspectiveCardStyle}>
-          <p class={perspectiveTimeStyle}>10</p>
+          <p class={perspectiveTimeStyle}></p>
           <p class={perspectiveDescStyle}>Weeks in total</p>
         </div>
         <div id="days-perspective" class={perspectiveCardStyle}>
-          <p class={perspectiveTimeStyle}>72</p>
+          <p class={perspectiveTimeStyle}></p>
           <p class={perspectiveDescStyle}>Days in total</p>
         </div>
         <div id="hours-perspective" class={perspectiveCardStyle}>
-          <p class={perspectiveTimeStyle}>1,731</p>
+          <p class={perspectiveTimeStyle}></p>
           <p class={perspectiveDescStyle}>Hours in total</p>
         </div>
         <div id="minutes-perspective" class={perspectiveCardStyle}>
-          <p class={perspectiveTimeStyle}>103,876</p>
+          <p class={perspectiveTimeStyle}></p>
           <p class={perspectiveDescStyle}>Hours in total</p>
         </div>
         <div id="seconds-perspective" class={perspectiveCardStyle}>
-          <p class={perspectiveTimeStyle}>6,232,555</p>
+          <p class={perspectiveTimeStyle}></p>
           <p class={perspectiveDescStyle}>Seconds in total</p>
         </div>
       </div>
     </section>
     <!-- > Journey together -->
     <section id="journey-together">
-      <h2>Our journey together</h2>
+      <h2 class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4">Our journey together</h2>
+      
       <!-- <div id="journey-together-container" class="flex items-center justify-center ">
         <p class="text-lg text-black-ink font-noto-sans-jp tracking-wide font-light">A place where time stands still for us</p>
       </div> -->
@@ -180,9 +181,29 @@ const perspectiveDescStyle =
     $("#countdown-container").removeClass("hidden");
   }
 
+  function updateTimePerspectives() {
+    const nowVancouver = getVancouverTime(new Date());
+    const targetVancouver = getVancouverTime(targetDate);
+    const totalSeconds = Math.floor((targetVancouver.getTime() - nowVancouver.getTime()) / 1000);
+
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const totalHours = Math.floor(totalMinutes / 60);
+    const totalDays = Math.floor(totalHours / 24);
+    const totalWeeks = Math.floor(totalDays / 7);
+
+    $("#seconds-perspective p:first-child").text(totalSeconds.toLocaleString());
+    $("#minutes-perspective p:first-child").text(totalMinutes.toLocaleString());
+    $("#hours-perspective p:first-child").text(totalHours.toLocaleString());
+    $("#days-perspective p:first-child").text(totalDays.toLocaleString());
+    $("#week-perspective p:first-child").text(totalWeeks.toLocaleString());
+    console.log("clcick");
+  }
+
   $(document).ready(function () {
     $("#salute").text(salute);
     updateCountdown();
+    updateTimePerspectives();
     setInterval(updateCountdown, 1000);
+    setInterval(updateTimePerspectives, 1000); // Actualiza las perspectivas cada minuto
   });
 </script>
