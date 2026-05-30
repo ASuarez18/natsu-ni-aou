@@ -17,19 +17,23 @@ import {
 // ? Perspectives
 const perspectiveCardStyle =
   "flex flex-col items-center bg-white gap-1 p-6 rounded-lg shadow-inner bg-stone-60 border border-stone-200/60";
+const perspectiveCardHover =
+  "hover:-translate-y-1.5 hover:scale-[1.05]  hover:inner-shadow hover:shadow-stone-400 transition-all duration-500";
 const perspectiveTimeStyle =
-  "text-3xl text-black-ink font-inter tracking-wider font-normal";
+  "text-4xl text-black-ink font-inter tracking-wider font-normal";
 const perspectiveDescStyle =
-  "text-sm text-ku-brown font-noto-sans-jp tracking-wide";
+  "text-base text-ku-brown font-noto-sans-jp tracking-wide";
 // ? Journey together
 const journeyCardStyle =
   "px-6 py-5 shadow-inner rounded-lg bg-stone-60 border bg-white border-stone-200/60 flex gap-2 items-center";
+const journeyCardHover =
+  "hover:-translate-y-1.5 hover:scale-[1.05]  hover:inner-shadow hover:shadow-stone-400 transition-all duration-500";
 const journeyIconStyle = "bg-ku-accent/10 p-2 rounded-full";
 const journeyTitleStyle =
-  "text-lg font-noto-sans-jp font-medium text-black-ink tracking-wider";
+  "text-xl font-noto-sans-jp font-medium text-black-ink tracking-wider";
 const journeyDateStyle =
-  "text-sm font-noto-sans-jp text-ku-brown tracking-wide";
-const journeyDaysAgoStyle = "font-noto-sans-jp text-black-ink/70";
+  "text-base font-noto-sans-jp text-ku-brown tracking-wide";
+const journeyDaysAgoStyle = "font-noto-sans-jp text-lg text-black-ink/70";
 const journeySpecialText = "font-semibold text-black-ink/80";
 ---
 
@@ -49,8 +53,9 @@ const journeySpecialText = "font-semibold text-black-ink/80";
     </h1>
     <div id="countdown-container" class="flex flex-col items-center my-6">
       <div
-        class="flex items-center gap-2 font-roboto-mono text-5xl font-light text-neutral-600"
+        class="flex items-center gap-4 font-inter text-7xl font-light text-neutral-600 tracking-wider"
       >
+        <!-- TODO: Put in one div the 00 and month -->
         <span id="cd-months" class="text-ku-brown">00</span>
         <span class="text-neutral-400 text-4xl">:</span>
         <span id="cd-weeks" class="text-ku-brown">00</span>
@@ -65,7 +70,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       </div>
 
       <div
-        class="flex justify-center gap-12 w-full max-w-xl px-2 mt-2 text-sm font-normal text-neutral-400 tracking-wide noto-sans-jp"
+        class="flex justify-center gap-21 w-full max-w-xl px-2 mt-2 text-lg font-normal text-neutral-400 tracking-wide noto-sans-jp"
       >
         <span class="w-12 text-center">Months</span>
         <span class="w-12 text-center">Weeks</span>
@@ -88,23 +93,23 @@ const journeySpecialText = "font-semibold text-black-ink/80";
         id="time-perspectives-container"
         class="flex items-center justify-center gap-6"
       >
-        <div id="week-perspective" class={perspectiveCardStyle}>
+        <div id="week-perspective" class=`${perspectiveCardStyle} ${perspectiveCardHover}`>
           <p class={perspectiveTimeStyle}></p>
           <p class={perspectiveDescStyle}>Weeks in total</p>
         </div>
-        <div id="days-perspective" class={perspectiveCardStyle}>
+        <div id="days-perspective" class=`${perspectiveCardStyle} ${perspectiveCardHover}`>
           <p class={perspectiveTimeStyle}></p>
           <p class={perspectiveDescStyle}>Days in total</p>
         </div>
-        <div id="hours-perspective" class={perspectiveCardStyle}>
+        <div id="hours-perspective" class=`${perspectiveCardStyle} ${perspectiveCardHover}`>
           <p class={perspectiveTimeStyle}></p>
           <p class={perspectiveDescStyle}>Hours in total</p>
         </div>
-        <div id="minutes-perspective" class={perspectiveCardStyle}>
+        <div id="minutes-perspective" class=`${perspectiveCardStyle} ${perspectiveCardHover}`>
           <p class={perspectiveTimeStyle}></p>
           <p class={perspectiveDescStyle}>Minutes in total</p>
         </div>
-        <div id="seconds-perspective" class={perspectiveCardStyle}>
+        <div id="seconds-perspective" class=`${perspectiveCardStyle} ${perspectiveCardHover}`>
           <p class={perspectiveTimeStyle}></p>
           <p class={perspectiveDescStyle}>Seconds in total</p>
         </div>
@@ -119,10 +124,10 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       </h2>
       <div
         id="journeys-container"
-        class="flex items-center justify-center gap-6 w-full px-4"
+        class="flex items-center justify-center gap-10 w-full px-4"
       >
         <!-- - First Met  -->
-        <div id="first-met" class={journeyCardStyle}>
+        <div id="first-met" class={`${journeyCardStyle} ${journeyCardHover}`}>
           <div class={journeyIconStyle}>
             <DoorOpen size={48} stroke-width={1} class="text-ku-brown" />
           </div>
@@ -130,14 +135,12 @@ const journeySpecialText = "font-semibold text-black-ink/80";
             <h4 class={journeyTitleStyle}>First met</h4>
             <p class={journeyDateStyle}>24 January, 2026</p>
             <p class={journeyDaysAgoStyle}>
-              <span id="met-days" class={journeySpecialText}>
-                10</span
-              > days ago
+              <span id="met-days" class={journeySpecialText}> 10</span> days ago
             </p>
           </div>
         </div>
         <!-- - First Step  -->
-        <div id="first-step" class={journeyCardStyle}>
+        <div id="first-step" class=`${journeyCardStyle} ${journeyCardHover}`>
           <div class={journeyIconStyle}>
             <Dessert size={48} stroke-width={1} class="text-ku-brown" />
           </div>
@@ -145,14 +148,12 @@ const journeySpecialText = "font-semibold text-black-ink/80";
             <h4 class={journeyTitleStyle}>First Step</h4>
             <p class={journeyDateStyle}>13 February, 2026</p>
             <p class={journeyDaysAgoStyle}>
-              <span id="step-days" class={journeySpecialText}>
-                </span
-              > days ago
+              <span id="step-days" class={journeySpecialText}> </span> days ago
             </p>
           </div>
         </div>
         <!-- - official  -->
-        <div id="official" class={journeyCardStyle}>
+        <div id="official" class=`${journeyCardStyle} ${journeyCardHover}`>
           <div class={journeyIconStyle}>
             <HandHeart size={48} stroke-width={1} class="text-ku-brown" />
           </div>
@@ -160,17 +161,13 @@ const journeySpecialText = "font-semibold text-black-ink/80";
             <h4 class={journeyTitleStyle}>Official</h4>
             <p class={journeyDateStyle}>25 February, 2026</p>
             <p class={journeyDaysAgoStyle}>
-              <span id="official-days" class={journeySpecialText}>
-                </span
-              > days ago
+              <span id="official-days" class={journeySpecialText}> </span> days ago
             </p>
           </div>
         </div>
       </div>
-      <!-- <div id="journey-together-container" class="flex items-center justify-center ">
-        <p class="text-lg text-black-ink font-noto-sans-jp tracking-wide font-light">A place where time stands still for us</p>
-      </div> -->
     </section>
+    <section id="" class="mb-10"></section>
   </main>
 </Layout>
 
@@ -185,7 +182,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
 
   // ---------------------------------------------------------------------
   // 3 de Agosto de 2026, 19:45 de Vancouver -> 4 de Agosto, 02:45 UTC
-  const targetDate = new Date(Date.UTC(2026, 7, 4, 2, 45, 0)); // 5 - 4
+  const targetDate = new Date(Date.UTC(2026, 7, 3, 2, 45, 0)); // 5 - 4
 
   function getVancouverTime(date: Date) {
     return new Date(
@@ -279,7 +276,9 @@ const journeySpecialText = "font-semibold text-black-ink/80";
   function getJourneyDaysAgo(targetId: string, targetDate: Date) {
     const nowVancouver = getVancouverTime(new Date());
     const targetVancouver = getVancouverTime(targetDate);
-    const diffTime = Math.abs(targetVancouver.getTime() - nowVancouver.getTime());
+    const diffTime = Math.abs(
+      targetVancouver.getTime() - nowVancouver.getTime(),
+    );
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
     $(`#${targetId}`).text(diffDays);
   }
@@ -288,9 +287,9 @@ const journeySpecialText = "font-semibold text-black-ink/80";
     $("#salute").text(salute);
     updateCountdown();
     updateTimePerspectives();
-    getJourneyDaysAgo("met-days", new Date(2026, 0, 24)); // 24 Jan 2026
-    getJourneyDaysAgo("step-days", new Date(2026, 1, 13)); // 13 Feb 2026
-    getJourneyDaysAgo("official-days", new Date(2026, 1, 25)); // 25 Feb 2026
+    getJourneyDaysAgo("met-days", new Date(2026, 0, 23)); // 24 Jan 2026
+    getJourneyDaysAgo("step-days", new Date(2026, 1, 12)); // 13 Feb 2026
+    getJourneyDaysAgo("official-days", new Date(2026, 1, 24)); // 25 Feb 2026
     setInterval(updateCountdown, 1000);
     setInterval(updateTimePerspectives, 1000); // Actualiza las perspectivas cada minuto
   });
