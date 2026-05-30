@@ -56,241 +56,301 @@ const journeySpecialText = "font-semibold text-black-ink/80";
         class="flex items-center gap-4 font-inter text-7xl font-light text-neutral-600 tracking-wider"
       >
         <!-- TODO: Put in one div the 00 and month -->
-        <span id="cd-months" class="text-ku-brown">00</span>
-        <span class="text-neutral-400 text-4xl">:</span>
-        <span id="cd-weeks" class="text-ku-brown">00</span>
-        <span class="text-neutral-400 text-4xl">:</span>
-        <span id="cd-days" class="text-ku-brown">00</span>
-        <span class="text-neutral-400 text-4xl">:</span>
-        <span id="cd-hours" class="text-ku-brown">00</span>
-        <span class="text-neutral-400 text-4xl">:</span>
-        <span id="cd-minutes" class="text-ku-brown">00</span>
-        <span class="text-neutral-400 text-4xl">:</span>
-        <span id="cd-seconds" class="text-ku-brown">00</span>
-      </div>
-
-      <div
-        class="flex justify-center gap-21 w-full max-w-xl px-2 mt-2 text-lg font-normal text-neutral-400 tracking-wide noto-sans-jp"
-      >
-        <span class="w-12 text-center">Months</span>
-        <span class="w-12 text-center">Weeks</span>
-        <span class="w-12 text-center">Days</span>
-        <span class="w-12 text-center">Hours</span>
-        <span class="w-12 text-center">Minutes</span>
-        <span class="w-12 text-center">Seconds</span>
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <span id="cd-months" class="text-ku-brown">00</span>
+          <span
+            class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
+            >Months</span
+          >
+        </div>
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <span class="text-neutral-500 font-semibold text-4xl">:</span>
+          <div class="h-8"></div>
+        </div>
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <span id="cd-weeks" class="text-ku-brown">00</span>
+          <span
+            class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
+            >Weeks</span
+          >
+        </div>
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <span class="text-neutral-500 font-semibold text-4xl">:</span>
+          <div class="h-8"></div>
+        </div>
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <span id="cd-days" class="text-ku-brown">00</span>
+          <span
+            class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
+            >Days</span
+          >
+        </div>
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <span class="text-neutral-500 font-semibold text-4xl">:</span>
+          <div class="h-8"></div>
+        </div>
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <span id="cd-hours" class="text-ku-brown">00</span>
+          <span
+            class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
+            >Hours</span
+          >
+        </div>
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <span class="text-neutral-500 font-semibold text-4xl">:</span>
+          <div class="h-8"></div>
+        </div>
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <span id="cd-minutes" class="text-ku-brown">00</span>
+          <span
+            class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
+            >Minutes</span
+          >
+        </div>
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <span class="text-neutral-500 font-semibold text-4xl">:</span>
+          <div class="h-8"></div>
+        </div>
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <span id="cd-seconds" class="text-ku-brown">00</span>
+          <span
+            class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
+            >Seconds</span
+          >
+        </div>
       </div>
     </div>
+    <main class="flex flex-col gap-10">
+      <!-- > Time perspectives -->
+      <section id="time-perspectives">
+        <h2
+          class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4"
+        >
+          Time perspectives
+        </h2>
+        <div
+          id="time-perspectives-container"
+          class="flex items-center justify-center gap-6"
+        >
+          <div
+            id="week-perspective"
+            class=`${perspectiveCardStyle} ${perspectiveCardHover}`
+          >
+            <p class={perspectiveTimeStyle}></p>
+            <p class={perspectiveDescStyle}>Weeks in total</p>
+          </div>
+          <div
+            id="days-perspective"
+            class=`${perspectiveCardStyle} ${perspectiveCardHover}`
+          >
+            <p class={perspectiveTimeStyle}></p>
+            <p class={perspectiveDescStyle}>Days in total</p>
+          </div>
+          <div
+            id="hours-perspective"
+            class=`${perspectiveCardStyle} ${perspectiveCardHover}`
+          >
+            <p class={perspectiveTimeStyle}></p>
+            <p class={perspectiveDescStyle}>Hours in total</p>
+          </div>
+          <div
+            id="minutes-perspective"
+            class=`${perspectiveCardStyle} ${perspectiveCardHover}`
+          >
+            <p class={perspectiveTimeStyle}></p>
+            <p class={perspectiveDescStyle}>Minutes in total</p>
+          </div>
+          <div
+            id="seconds-perspective"
+            class=`${perspectiveCardStyle} ${perspectiveCardHover}`
+          >
+            <p class={perspectiveTimeStyle}></p>
+            <p class={perspectiveDescStyle}>Seconds in total</p>
+          </div>
+        </div>
+      </section>
+      <!-- > Journey together -->
+      <section id="journey-together">
+        <h2
+          class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4"
+        >
+          Our journey together
+        </h2>
+        <div
+          id="journeys-container"
+          class="flex items-center justify-center gap-10 w-full px-4"
+        >
+          <!-- - First Met  -->
+          <div id="first-met" class={`${journeyCardStyle} ${journeyCardHover}`}>
+            <div class={journeyIconStyle}>
+              <DoorOpen size={48} stroke-width={1} class="text-ku-brown" />
+            </div>
+            <div>
+              <h4 class={journeyTitleStyle}>First met</h4>
+              <p class={journeyDateStyle}>24 January, 2026</p>
+              <p class={journeyDaysAgoStyle}>
+                <span id="met-days" class={journeySpecialText}> 10</span> days ago
+              </p>
+            </div>
+          </div>
+          <!-- - First Step  -->
+          <div id="first-step" class=`${journeyCardStyle} ${journeyCardHover}`>
+            <div class={journeyIconStyle}>
+              <Dessert size={48} stroke-width={1} class="text-ku-brown" />
+            </div>
+            <div>
+              <h4 class={journeyTitleStyle}>First Step</h4>
+              <p class={journeyDateStyle}>13 February, 2026</p>
+              <p class={journeyDaysAgoStyle}>
+                <span id="step-days" class={journeySpecialText}> </span> days ago
+              </p>
+            </div>
+          </div>
+          <!-- - official  -->
+          <div id="official" class=`${journeyCardStyle} ${journeyCardHover}`>
+            <div class={journeyIconStyle}>
+              <HandHeart size={48} stroke-width={1} class="text-ku-brown" />
+            </div>
+            <div>
+              <h4 class={journeyTitleStyle}>Official</h4>
+              <p class={journeyDateStyle}>25 February, 2026</p>
+              <p class={journeyDaysAgoStyle}>
+                <span id="official-days" class={journeySpecialText}> </span> days
+                ago
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="" class="mb-10"></section>
+    </main>
   </header>
-  <main class="flex flex-col gap-10">
-    <!-- > Time perspectives -->
-    <section id="time-perspectives">
-      <h2
-        class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4"
-      >
-        Time perspectives
-      </h2>
-      <div
-        id="time-perspectives-container"
-        class="flex items-center justify-center gap-6"
-      >
-        <div id="week-perspective" class=`${perspectiveCardStyle} ${perspectiveCardHover}`>
-          <p class={perspectiveTimeStyle}></p>
-          <p class={perspectiveDescStyle}>Weeks in total</p>
-        </div>
-        <div id="days-perspective" class=`${perspectiveCardStyle} ${perspectiveCardHover}`>
-          <p class={perspectiveTimeStyle}></p>
-          <p class={perspectiveDescStyle}>Days in total</p>
-        </div>
-        <div id="hours-perspective" class=`${perspectiveCardStyle} ${perspectiveCardHover}`>
-          <p class={perspectiveTimeStyle}></p>
-          <p class={perspectiveDescStyle}>Hours in total</p>
-        </div>
-        <div id="minutes-perspective" class=`${perspectiveCardStyle} ${perspectiveCardHover}`>
-          <p class={perspectiveTimeStyle}></p>
-          <p class={perspectiveDescStyle}>Minutes in total</p>
-        </div>
-        <div id="seconds-perspective" class=`${perspectiveCardStyle} ${perspectiveCardHover}`>
-          <p class={perspectiveTimeStyle}></p>
-          <p class={perspectiveDescStyle}>Seconds in total</p>
-        </div>
-      </div>
-    </section>
-    <!-- > Journey together -->
-    <section id="journey-together">
-      <h2
-        class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4"
-      >
-        Our journey together
-      </h2>
-      <div
-        id="journeys-container"
-        class="flex items-center justify-center gap-10 w-full px-4"
-      >
-        <!-- - First Met  -->
-        <div id="first-met" class={`${journeyCardStyle} ${journeyCardHover}`}>
-          <div class={journeyIconStyle}>
-            <DoorOpen size={48} stroke-width={1} class="text-ku-brown" />
-          </div>
-          <div>
-            <h4 class={journeyTitleStyle}>First met</h4>
-            <p class={journeyDateStyle}>24 January, 2026</p>
-            <p class={journeyDaysAgoStyle}>
-              <span id="met-days" class={journeySpecialText}> 10</span> days ago
-            </p>
-          </div>
-        </div>
-        <!-- - First Step  -->
-        <div id="first-step" class=`${journeyCardStyle} ${journeyCardHover}`>
-          <div class={journeyIconStyle}>
-            <Dessert size={48} stroke-width={1} class="text-ku-brown" />
-          </div>
-          <div>
-            <h4 class={journeyTitleStyle}>First Step</h4>
-            <p class={journeyDateStyle}>13 February, 2026</p>
-            <p class={journeyDaysAgoStyle}>
-              <span id="step-days" class={journeySpecialText}> </span> days ago
-            </p>
-          </div>
-        </div>
-        <!-- - official  -->
-        <div id="official" class=`${journeyCardStyle} ${journeyCardHover}`>
-          <div class={journeyIconStyle}>
-            <HandHeart size={48} stroke-width={1} class="text-ku-brown" />
-          </div>
-          <div>
-            <h4 class={journeyTitleStyle}>Official</h4>
-            <p class={journeyDateStyle}>25 February, 2026</p>
-            <p class={journeyDaysAgoStyle}>
-              <span id="official-days" class={journeySpecialText}> </span> days ago
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="" class="mb-10"></section>
-  </main>
-</Layout>
 
-<script>
-  import $ from "jquery";
-  const userName = localStorage.getItem("user_session");
-  const hour = new Date().getHours();
-  let salute = `Good Morning, ${userName}!`;
-  if (hour >= 12 && hour < 18) salute = `Good Afternoon, ${userName}!`;
-  else if (hour >= 18 && hour < 22) salute = `Good Evening, ${userName}!`;
-  else if (hour >= 22 || hour < 6) salute = `Good Night, ${userName}!`;
+  <script>
+    import $ from "jquery";
+    const userName = localStorage.getItem("user_session");
+    const hour = new Date().getHours();
+    let salute = `Good Morning, ${userName}!`;
+    if (hour >= 12 && hour < 18) salute = `Good Afternoon, ${userName}!`;
+    else if (hour >= 18 && hour < 22) salute = `Good Evening, ${userName}!`;
+    else if (hour >= 22 || hour < 6) salute = `Good Night, ${userName}!`;
 
-  // ---------------------------------------------------------------------
-  // 3 de Agosto de 2026, 19:45 de Vancouver -> 4 de Agosto, 02:45 UTC
-  const targetDate = new Date(Date.UTC(2026, 7, 3, 2, 45, 0)); // 5 - 4
+    // ---------------------------------------------------------------------
+    // 3 de Agosto de 2026, 19:45 de Vancouver -> 4 de Agosto, 02:45 UTC
+    const targetDate = new Date(Date.UTC(2026, 7, 3, 2, 45, 0)); // 5 - 4
 
-  function getVancouverTime(date: Date) {
-    return new Date(
-      date.toLocaleString("en-US", { timeZone: "America/Vancouver" }),
-    );
-  }
-
-  function updateCountdown() {
-    const nowVancouver = getVancouverTime(new Date());
-    const targetVancouver = getVancouverTime(targetDate);
-
-    let difference = targetVancouver.getTime() - nowVancouver.getTime();
-
-    if (difference <= 0) {
-      $("#countdown-container").html(
-        "<p class='text-2xl font-light text-[#805C5C] animate-heartbeat'>¡Llegó el momento! ❤️</p>",
+    function getVancouverTime(date: Date) {
+      return new Date(
+        date.toLocaleString("en-US", { timeZone: "America/Vancouver" }),
       );
-      return;
     }
 
-    // --- CÁLCULO DE MESES REALES ---
-    let months =
-      (targetVancouver.getFullYear() - nowVancouver.getFullYear()) * 12 +
-      (targetVancouver.getMonth() - nowVancouver.getMonth());
+    function updateCountdown() {
+      const nowVancouver = getVancouverTime(new Date());
+      const targetVancouver = getVancouverTime(targetDate);
 
-    // Clonamos la fecha actual para simular el avance de los meses pasados
-    let checkDate = new Date(nowVancouver);
-    checkDate.setMonth(checkDate.getMonth() + months);
+      let difference = targetVancouver.getTime() - nowVancouver.getTime();
 
-    // Si al sumar los meses nos pasamos del día objetivo, restamos un mes
-    if (checkDate > targetVancouver) {
-      months--;
-      checkDate = new Date(nowVancouver);
+      if (difference <= 0) {
+        $("#countdown-container").html(
+          "<p class='text-2xl font-light text-[#805C5C] animate-heartbeat'>¡Llegó el momento! ❤️</p>",
+        );
+        return;
+      }
+
+      // --- CÁLCULO DE MESES REALES ---
+      let months =
+        (targetVancouver.getFullYear() - nowVancouver.getFullYear()) * 12 +
+        (targetVancouver.getMonth() - nowVancouver.getMonth());
+
+      // Clonamos la fecha actual para simular el avance de los meses pasados
+      let checkDate = new Date(nowVancouver);
       checkDate.setMonth(checkDate.getMonth() + months);
+
+      // Si al sumar los meses nos pasamos del día objetivo, restamos un mes
+      if (checkDate > targetVancouver) {
+        months--;
+        checkDate = new Date(nowVancouver);
+        checkDate.setMonth(checkDate.getMonth() + months);
+      }
+
+      // El tiempo restante tras quitar los meses exactos
+      let remainingTime = targetVancouver.getTime() - checkDate.getTime();
+
+      // --- CÁLCULO DE SEMANAS, DÍAS Y HORAS ---
+      const msInWeek = 1000 * 60 * 60 * 24 * 7;
+      const msInDay = 1000 * 60 * 60 * 24;
+      const msInHour = 1000 * 60 * 60;
+      const msInMinute = 1000 * 60;
+
+      const weeks = Math.floor(remainingTime / msInWeek);
+      remainingTime %= msInWeek;
+
+      const days = Math.floor(remainingTime / msInDay);
+      remainingTime %= msInDay;
+
+      const hours = Math.floor(remainingTime / msInHour);
+      remainingTime %= msInHour;
+
+      const minutes = Math.floor(remainingTime / msInMinute);
+      remainingTime %= msInMinute;
+
+      const seconds = Math.floor(remainingTime / 1000);
+
+      // --- INYECCIÓN CON JQUERY ---
+      $("#cd-months").text(String(months).padStart(2, "0"));
+      $("#cd-weeks").text(String(weeks).padStart(2, "0"));
+      $("#cd-days").text(String(days).padStart(2, "0"));
+      $("#cd-hours").text(String(hours).padStart(2, "0"));
+      $("#cd-minutes").text(String(minutes).padStart(2, "0"));
+      $("#cd-seconds").text(String(seconds).padStart(2, "0"));
+
+      $("#countdown-container").removeClass("hidden");
     }
 
-    // El tiempo restante tras quitar los meses exactos
-    let remainingTime = targetVancouver.getTime() - checkDate.getTime();
+    function updateTimePerspectives() {
+      const nowVancouver = getVancouverTime(new Date());
+      const targetVancouver = getVancouverTime(targetDate);
+      const totalSeconds = Math.floor(
+        (targetVancouver.getTime() - nowVancouver.getTime()) / 1000,
+      );
 
-    // --- CÁLCULO DE SEMANAS, DÍAS Y HORAS ---
-    const msInWeek = 1000 * 60 * 60 * 24 * 7;
-    const msInDay = 1000 * 60 * 60 * 24;
-    const msInHour = 1000 * 60 * 60;
-    const msInMinute = 1000 * 60;
+      const totalMinutes = Math.floor(totalSeconds / 60);
+      const totalHours = Math.floor(totalMinutes / 60);
+      const totalDays = Math.floor(totalHours / 24);
+      const totalWeeks = Math.floor(totalDays / 7);
 
-    const weeks = Math.floor(remainingTime / msInWeek);
-    remainingTime %= msInWeek;
+      $("#seconds-perspective p:first-child").text(
+        totalSeconds.toLocaleString(),
+      );
+      $("#minutes-perspective p:first-child").text(
+        totalMinutes.toLocaleString(),
+      );
+      $("#hours-perspective p:first-child").text(totalHours.toLocaleString());
+      $("#days-perspective p:first-child").text(totalDays.toLocaleString());
+      $("#week-perspective p:first-child").text(totalWeeks.toLocaleString());
+      console.log("clcick");
+    }
 
-    const days = Math.floor(remainingTime / msInDay);
-    remainingTime %= msInDay;
+    function getJourneyDaysAgo(targetId: string, targetDate: Date) {
+      const nowVancouver = getVancouverTime(new Date());
+      const targetVancouver = getVancouverTime(targetDate);
+      const diffTime = Math.abs(
+        targetVancouver.getTime() - nowVancouver.getTime(),
+      );
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      $(`#${targetId}`).text(diffDays);
+    }
 
-    const hours = Math.floor(remainingTime / msInHour);
-    remainingTime %= msInHour;
-
-    const minutes = Math.floor(remainingTime / msInMinute);
-    remainingTime %= msInMinute;
-
-    const seconds = Math.floor(remainingTime / 1000);
-
-    // --- INYECCIÓN CON JQUERY ---
-    $("#cd-months").text(String(months).padStart(2, "0"));
-    $("#cd-weeks").text(String(weeks).padStart(2, "0"));
-    $("#cd-days").text(String(days).padStart(2, "0"));
-    $("#cd-hours").text(String(hours).padStart(2, "0"));
-    $("#cd-minutes").text(String(minutes).padStart(2, "0"));
-    $("#cd-seconds").text(String(seconds).padStart(2, "0"));
-
-    $("#countdown-container").removeClass("hidden");
-  }
-
-  function updateTimePerspectives() {
-    const nowVancouver = getVancouverTime(new Date());
-    const targetVancouver = getVancouverTime(targetDate);
-    const totalSeconds = Math.floor(
-      (targetVancouver.getTime() - nowVancouver.getTime()) / 1000,
-    );
-
-    const totalMinutes = Math.floor(totalSeconds / 60);
-    const totalHours = Math.floor(totalMinutes / 60);
-    const totalDays = Math.floor(totalHours / 24);
-    const totalWeeks = Math.floor(totalDays / 7);
-
-    $("#seconds-perspective p:first-child").text(totalSeconds.toLocaleString());
-    $("#minutes-perspective p:first-child").text(totalMinutes.toLocaleString());
-    $("#hours-perspective p:first-child").text(totalHours.toLocaleString());
-    $("#days-perspective p:first-child").text(totalDays.toLocaleString());
-    $("#week-perspective p:first-child").text(totalWeeks.toLocaleString());
-    console.log("clcick");
-  }
-
-  function getJourneyDaysAgo(targetId: string, targetDate: Date) {
-    const nowVancouver = getVancouverTime(new Date());
-    const targetVancouver = getVancouverTime(targetDate);
-    const diffTime = Math.abs(
-      targetVancouver.getTime() - nowVancouver.getTime(),
-    );
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    $(`#${targetId}`).text(diffDays);
-  }
-
-  $(document).ready(function () {
-    $("#salute").text(salute);
-    updateCountdown();
-    updateTimePerspectives();
-    getJourneyDaysAgo("met-days", new Date(2026, 0, 23)); // 24 Jan 2026
-    getJourneyDaysAgo("step-days", new Date(2026, 1, 12)); // 13 Feb 2026
-    getJourneyDaysAgo("official-days", new Date(2026, 1, 24)); // 25 Feb 2026
-    setInterval(updateCountdown, 1000);
-    setInterval(updateTimePerspectives, 1000); // Actualiza las perspectivas cada minuto
-  });
-</script>
+    $(document).ready(function () {
+      $("#salute").text(salute);
+      updateCountdown();
+      updateTimePerspectives();
+      getJourneyDaysAgo("met-days", new Date(2026, 0, 23)); // 24 Jan 2026
+      getJourneyDaysAgo("step-days", new Date(2026, 1, 12)); // 13 Feb 2026
+      getJourneyDaysAgo("official-days", new Date(2026, 1, 24)); // 25 Feb 2026
+      setInterval(updateCountdown, 1000);
+      setInterval(updateTimePerspectives, 1000); // Actualiza las perspectivas cada minuto
+    });
+  </script>
+</Layout>
