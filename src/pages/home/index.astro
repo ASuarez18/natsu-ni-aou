@@ -9,10 +9,9 @@ import {
   Heart,
   Cake,
 } from "@lucide/astro";
-// import Card from "../../components/Card.astro";
 
-// import cards from "../data/cards.json";
-
+import Image from "astro/components/Image.astro";
+import logo from "/public/logo.webp";
 // > Styles const
 // ? Perspectives
 const perspectiveCardStyle =
@@ -39,192 +38,200 @@ const journeySpecialText = "font-semibold text-black-ink/80";
 
 <!-- flex flex-col items-center justify-center min-h-screen -->
 <Layout style="bg-[#F8F8F3]">
-  <!-- > Main Countdown -->
-  <header>
-    <h3
+  <header class="w-full flex flex-row justify-end items-center px-10 py-3">
+    <!-- <h3
       id="salute"
-      class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4"
+      class="text-left font-noto-serif-jp text-4xl font-normal text-ku-brown "
+    > -->
+    <div
+      class="flex items-center gap-2 text-4xl font-noto-serif-jp font-medium text-[#805C5C]"
     >
-    </h3>
-    <h1
-      class="text-center font-noto-serif-jp text-4xl font-normal text-ku-brown"
-    >
-      Time for Reuniting
-    </h1>
-    <div id="countdown-container" class="flex flex-col items-center my-6">
-      <div
-        class="flex items-center gap-4 font-inter text-7xl font-light text-neutral-600 tracking-wider"
+      <span>夏に会おう</span>
+      <Image src={logo} alt="Logo" class="w-16 h-16 object-cover" />
+    </div>
+  </header>
+  <main class="flex flex-col">
+    <!-- > Main Countdown -->
+    <section id="countdown">
+      <h1
+        class="text-center font-noto-serif-jp text-4xl font-normal text-ku-brown"
       >
-        <!-- TODO: Put in one div the 00 and month -->
-        <div class="flex flex-col gap-2 items-center justify-center">
-          <span id="cd-months" class="text-ku-brown">00</span>
-          <span
-            class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
-            >Months</span
-          >
-        </div>
-        <div class="flex flex-col gap-2 items-center justify-center">
-          <span class="text-neutral-500 font-semibold text-4xl">:</span>
-          <div class="h-8"></div>
-        </div>
-        <div class="flex flex-col gap-2 items-center justify-center">
-          <span id="cd-weeks" class="text-ku-brown">00</span>
-          <span
-            class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
-            >Weeks</span
-          >
-        </div>
-        <div class="flex flex-col gap-2 items-center justify-center">
-          <span class="text-neutral-500 font-semibold text-4xl">:</span>
-          <div class="h-8"></div>
-        </div>
-        <div class="flex flex-col gap-2 items-center justify-center">
-          <span id="cd-days" class="text-ku-brown">00</span>
-          <span
-            class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
-            >Days</span
-          >
-        </div>
-        <div class="flex flex-col gap-2 items-center justify-center">
-          <span class="text-neutral-500 font-semibold text-4xl">:</span>
-          <div class="h-8"></div>
-        </div>
-        <div class="flex flex-col gap-2 items-center justify-center">
-          <span id="cd-hours" class="text-ku-brown">00</span>
-          <span
-            class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
-            >Hours</span
-          >
-        </div>
-        <div class="flex flex-col gap-2 items-center justify-center">
-          <span class="text-neutral-500 font-semibold text-4xl">:</span>
-          <div class="h-8"></div>
-        </div>
-        <div class="flex flex-col gap-2 items-center justify-center">
-          <span id="cd-minutes" class="text-ku-brown">00</span>
-          <span
-            class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
-            >Minutes</span
-          >
-        </div>
-        <div class="flex flex-col gap-2 items-center justify-center">
-          <span class="text-neutral-500 font-semibold text-4xl">:</span>
-          <div class="h-8"></div>
-        </div>
-        <div class="flex flex-col gap-2 items-center justify-center">
-          <span id="cd-seconds" class="text-ku-brown">00</span>
-          <span
-            class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
-            >Seconds</span
-          >
+        Time for Reuniting
+      </h1>
+      <div id="countdown-container" class="flex flex-col items-center my-6">
+        <div
+          class="flex items-center gap-4 font-inter text-7xl font-light text-neutral-600 tracking-wider"
+        >
+          <!-- TODO: Put in one div the 00 and month -->
+          <div class="flex flex-col gap-2 items-center justify-center">
+            <span id="cd-months" class="text-ku-brown">00</span>
+            <span
+              class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
+              >Months</span
+            >
+          </div>
+          <div class="flex flex-col gap-2 items-center justify-center">
+            <span class="text-neutral-500 font-semibold text-4xl">:</span>
+            <div class="h-8"></div>
+          </div>
+          <div class="flex flex-col gap-2 items-center justify-center">
+            <span id="cd-weeks" class="text-ku-brown">00</span>
+            <span
+              class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
+              >Weeks</span
+            >
+          </div>
+          <div class="flex flex-col gap-2 items-center justify-center">
+            <span class="text-neutral-500 font-semibold text-4xl">:</span>
+            <div class="h-8"></div>
+          </div>
+          <div class="flex flex-col gap-2 items-center justify-center">
+            <span id="cd-days" class="text-ku-brown">00</span>
+            <span
+              class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
+              >Days</span
+            >
+          </div>
+          <div class="flex flex-col gap-2 items-center justify-center">
+            <span class="text-neutral-500 font-semibold text-4xl">:</span>
+            <div class="h-8"></div>
+          </div>
+          <div class="flex flex-col gap-2 items-center justify-center">
+            <span id="cd-hours" class="text-ku-brown">00</span>
+            <span
+              class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
+              >Hours</span
+            >
+          </div>
+          <div class="flex flex-col gap-2 items-center justify-center">
+            <span class="text-neutral-500 font-semibold text-4xl">:</span>
+            <div class="h-8"></div>
+          </div>
+          <div class="flex flex-col gap-2 items-center justify-center">
+            <span id="cd-minutes" class="text-ku-brown">00</span>
+            <span
+              class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
+              >Minutes</span
+            >
+          </div>
+          <div class="flex flex-col gap-2 items-center justify-center">
+            <span class="text-neutral-500 font-semibold text-4xl">:</span>
+            <div class="h-8"></div>
+          </div>
+          <div class="flex flex-col gap-2 items-center justify-center">
+            <span id="cd-seconds" class="text-ku-brown">00</span>
+            <span
+              class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
+              >Seconds</span
+            >
+          </div>
         </div>
       </div>
-    </div>
-    <main class="flex flex-col gap-10">
-      <!-- > Time perspectives -->
-      <section id="time-perspectives">
-        <h2
-          class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4"
-        >
-          Time perspectives
-        </h2>
+    </section>
+    <hr class="border-stone-300/60 w-4/5 mx-auto my-10" />
+    <!-- > Time perspectives -->
+    <section id="time-perspectives" class="flex flex-col gap-5">
+      <h2
+        class="text-center font-noto-serif-jp text-4xl font-normal text-ku-brown pl-4"
+      >
+        Time perspectives
+      </h2>
+      <div
+        id="time-perspectives-container"
+        class="flex items-center justify-center gap-6"
+      >
         <div
-          id="time-perspectives-container"
-          class="flex items-center justify-center gap-6"
+          id="week-perspective"
+          class=`${perspectiveCardStyle} ${perspectiveCardHover}`
         >
-          <div
-            id="week-perspective"
-            class=`${perspectiveCardStyle} ${perspectiveCardHover}`
-          >
-            <p class={perspectiveTimeStyle}></p>
-            <p class={perspectiveDescStyle}>Weeks in total</p>
+          <p class={perspectiveTimeStyle}></p>
+          <p class={perspectiveDescStyle}>Weeks in total</p>
+        </div>
+        <div
+          id="days-perspective"
+          class=`${perspectiveCardStyle} ${perspectiveCardHover}`
+        >
+          <p class={perspectiveTimeStyle}></p>
+          <p class={perspectiveDescStyle}>Days in total</p>
+        </div>
+        <div
+          id="hours-perspective"
+          class=`${perspectiveCardStyle} ${perspectiveCardHover}`
+        >
+          <p class={perspectiveTimeStyle}></p>
+          <p class={perspectiveDescStyle}>Hours in total</p>
+        </div>
+        <div
+          id="minutes-perspective"
+          class=`${perspectiveCardStyle} ${perspectiveCardHover}`
+        >
+          <p class={perspectiveTimeStyle}></p>
+          <p class={perspectiveDescStyle}>Minutes in total</p>
+        </div>
+        <div
+          id="seconds-perspective"
+          class=`${perspectiveCardStyle} ${perspectiveCardHover}`
+        >
+          <p class={perspectiveTimeStyle}></p>
+          <p class={perspectiveDescStyle}>Seconds in total</p>
+        </div>
+      </div>
+    </section>
+    <hr class="border-stone-300/60 w-4/5 mx-auto my-10" />
+    <!-- > Journey together -->
+    <section id="journey-together" class="flex flex-col gap-5">
+      <h2
+        class="text-center font-noto-serif-jp text-4xl font-normal text-ku-brown"
+      >
+        Our journey together
+      </h2>
+      <div
+        id="journeys-container"
+        class="flex items-center justify-center gap-10 w-full px-4"
+      >
+        <!-- - First Met  -->
+        <div id="first-met" class={`${journeyCardStyle} ${journeyCardHover}`}>
+          <div class={journeyIconStyle}>
+            <DoorOpen size={48} stroke-width={1} class="text-ku-brown" />
           </div>
-          <div
-            id="days-perspective"
-            class=`${perspectiveCardStyle} ${perspectiveCardHover}`
-          >
-            <p class={perspectiveTimeStyle}></p>
-            <p class={perspectiveDescStyle}>Days in total</p>
-          </div>
-          <div
-            id="hours-perspective"
-            class=`${perspectiveCardStyle} ${perspectiveCardHover}`
-          >
-            <p class={perspectiveTimeStyle}></p>
-            <p class={perspectiveDescStyle}>Hours in total</p>
-          </div>
-          <div
-            id="minutes-perspective"
-            class=`${perspectiveCardStyle} ${perspectiveCardHover}`
-          >
-            <p class={perspectiveTimeStyle}></p>
-            <p class={perspectiveDescStyle}>Minutes in total</p>
-          </div>
-          <div
-            id="seconds-perspective"
-            class=`${perspectiveCardStyle} ${perspectiveCardHover}`
-          >
-            <p class={perspectiveTimeStyle}></p>
-            <p class={perspectiveDescStyle}>Seconds in total</p>
+          <div>
+            <h4 class={journeyTitleStyle}>First met</h4>
+            <p class={journeyDateStyle}>24 January, 2026</p>
+            <p class={journeyDaysAgoStyle}>
+              <span id="met-days" class={journeySpecialText}> 10</span> days ago
+            </p>
           </div>
         </div>
-      </section>
-      <!-- > Journey together -->
-      <section id="journey-together">
-        <h2
-          class="text-left font-noto-serif-jp text-2xl font-normal text-ku-brown mt-5 pl-4"
-        >
-          Our journey together
-        </h2>
-        <div
-          id="journeys-container"
-          class="flex items-center justify-center gap-10 w-full px-4"
-        >
-          <!-- - First Met  -->
-          <div id="first-met" class={`${journeyCardStyle} ${journeyCardHover}`}>
-            <div class={journeyIconStyle}>
-              <DoorOpen size={48} stroke-width={1} class="text-ku-brown" />
-            </div>
-            <div>
-              <h4 class={journeyTitleStyle}>First met</h4>
-              <p class={journeyDateStyle}>24 January, 2026</p>
-              <p class={journeyDaysAgoStyle}>
-                <span id="met-days" class={journeySpecialText}> 10</span> days ago
-              </p>
-            </div>
+        <!-- - First Step  -->
+        <div id="first-step" class=`${journeyCardStyle} ${journeyCardHover}`>
+          <div class={journeyIconStyle}>
+            <Dessert size={48} stroke-width={1} class="text-ku-brown" />
           </div>
-          <!-- - First Step  -->
-          <div id="first-step" class=`${journeyCardStyle} ${journeyCardHover}`>
-            <div class={journeyIconStyle}>
-              <Dessert size={48} stroke-width={1} class="text-ku-brown" />
-            </div>
-            <div>
-              <h4 class={journeyTitleStyle}>First Step</h4>
-              <p class={journeyDateStyle}>13 February, 2026</p>
-              <p class={journeyDaysAgoStyle}>
-                <span id="step-days" class={journeySpecialText}> </span> days ago
-              </p>
-            </div>
-          </div>
-          <!-- - official  -->
-          <div id="official" class=`${journeyCardStyle} ${journeyCardHover}`>
-            <div class={journeyIconStyle}>
-              <HandHeart size={48} stroke-width={1} class="text-ku-brown" />
-            </div>
-            <div>
-              <h4 class={journeyTitleStyle}>Official</h4>
-              <p class={journeyDateStyle}>25 February, 2026</p>
-              <p class={journeyDaysAgoStyle}>
-                <span id="official-days" class={journeySpecialText}> </span> days
-                ago
-              </p>
-            </div>
+          <div>
+            <h4 class={journeyTitleStyle}>First Step</h4>
+            <p class={journeyDateStyle}>13 February, 2026</p>
+            <p class={journeyDaysAgoStyle}>
+              <span id="step-days" class={journeySpecialText}> </span> days ago
+            </p>
           </div>
         </div>
-      </section>
-      <section id="" class="mb-10"></section>
-    </main>
-  </header>
+        <!-- - official  -->
+        <div id="official" class=`${journeyCardStyle} ${journeyCardHover}`>
+          <div class={journeyIconStyle}>
+            <HandHeart size={48} stroke-width={1} class="text-ku-brown" />
+          </div>
+          <div>
+            <h4 class={journeyTitleStyle}>Official</h4>
+            <p class={journeyDateStyle}>25 February, 2026</p>
+            <p class={journeyDaysAgoStyle}>
+              <span id="official-days" class={journeySpecialText}> </span> days ago
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="" class="mb-10"></section>
+  </main>
 
   <script>
     import $ from "jquery";
