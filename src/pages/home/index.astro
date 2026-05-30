@@ -38,6 +38,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
 
 <!-- flex flex-col items-center justify-center min-h-screen -->
 <Layout style="bg-[#F8F8F3]">
+  <div id="sakura-fall"></div>
   <header class="w-full flex flex-row justify-end items-center px-10 py-3">
     <!-- <h3
       id="salute"
@@ -62,8 +63,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
         <div
           class="flex items-center gap-4 font-inter text-7xl font-light text-neutral-600 tracking-wider"
         >
-          <!-- TODO: Put in one div the 00 and month -->
-          <div class="flex flex-col gap-2 items-center justify-center">
+          <div class="flex flex-col gap-2 items-center justify-center w-18">
             <span id="cd-months" class="text-ku-brown">00</span>
             <span
               class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
@@ -74,7 +74,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
-          <div class="flex flex-col gap-2 items-center justify-center">
+          <div class="flex flex-col gap-2 items-center justify-center w-18">
             <span id="cd-weeks" class="text-ku-brown">00</span>
             <span
               class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
@@ -85,7 +85,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
-          <div class="flex flex-col gap-2 items-center justify-center">
+          <div class="flex flex-col gap-2 items-center justify-center w-18">
             <span id="cd-days" class="text-ku-brown">00</span>
             <span
               class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
@@ -96,7 +96,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
-          <div class="flex flex-col gap-2 items-center justify-center">
+          <div class="flex flex-col gap-2 items-center justify-center w-18">
             <span id="cd-hours" class="text-ku-brown">00</span>
             <span
               class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
@@ -107,7 +107,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
-          <div class="flex flex-col gap-2 items-center justify-center">
+          <div class="flex flex-col gap-2 items-center justify-center w-18">
             <span id="cd-minutes" class="text-ku-brown">00</span>
             <span
               class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
@@ -118,7 +118,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
-          <div class="flex flex-col gap-2 items-center justify-center">
+          <div class="flex flex-col gap-2 items-center justify-center w-18">
             <span id="cd-seconds" class="text-ku-brown">00</span>
             <span
               class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
@@ -132,7 +132,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
     <!-- > Time perspectives -->
     <section id="time-perspectives" class="flex flex-col gap-5">
       <h2
-        class="text-center font-noto-serif-jp text-4xl font-normal text-ku-brown pl-4"
+        class="text-center font-noto-sans-jp text-4xl font-normal text-ku-brown pl-4"
       >
         Time perspectives
       </h2>
@@ -349,6 +349,72 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       $(`#${targetId}`).text(diffDays);
     }
 
+    // --- ANIMACIÓN SAKURA FALL ---
+    function createPetal() {
+      const $container = $("#sakura-fall");
+      if ($container.length === 0) return;
+
+      const $petal = $('<div class="sakura-petal"></div>');
+
+      // Valores aleatorios estéticos
+      const startLeft = Math.random() * $container.width();
+      const size = Math.random() * 8 + 8; // Tamaños de 8px a 16px
+      const fallDuration = Math.random() * 8 + 7; // Caída gentil de entre 7 y 15 segundos
+      const swayDuration = Math.random() * 4 + 3; // Balanceo de entre 3 y 7 segundos
+      const delay = Math.random() * 2; // Pequeño delay de inicio
+
+      $petal.css({
+        left: `${startLeft}px`,
+        width: `${size}px`,
+        height: `${size * 0.75}px`, // Mantener la proporción alargada del pétalo
+        animationName: "fall, sway",
+        animationDuration: `${fallDuration}s, ${swayDuration}s`,
+        animationDelay: `${delay}s`,
+        opacity: Math.random() * 0.4 + 0.5, // Variación sutil de opacidad
+      });
+
+      $container.append($petal);
+
+      // Limpieza de memoria: remueve el nodo del DOM cuando termina su viaje
+      setTimeout(
+        () => {
+          $petal.remove();
+        },
+        (fallDuration + delay) * 1000,
+      );
+    }
+
+    // Lanzador inicial controlado para no saturar el rendimiento
+    function startSakuraShower() {
+      // Genera 30 pétalos inmediatamente esparcidos en diferentes alturas del viewport original
+      for (let i = 0; i < 25; i++) {
+        setTimeout(() => {
+          const $petal = $('<div class="sakura-petal"></div>');
+          const startLeft = Math.random() * $("#sakura-fall").width();
+          const size = Math.random() * 8 + 8;
+          const fallDuration = Math.random() * 8 + 7;
+          const swayDuration = Math.random() * 4 + 3;
+
+          // El truco del pre-render: forzar un top inicial aleatorio en la primera tanda
+          const randomTop = Math.random() * 100;
+
+          $petal.css({
+            left: `${startLeft}px`,
+            width: `${size}px`,
+            height: `${size * 0.75}px`,
+            animationName: "fall, sway",
+            animationDuration: `${fallDuration}s, ${swayDuration}s`,
+            top: `${randomTop}%`,
+          });
+          $("#sakura-fall").append($petal);
+          setTimeout(() => $petal.remove(), fallDuration * 1000);
+        }, Math.random() * 3000);
+      }
+
+      // Intervalo infinito: Genera un pétalo nuevo cada 400ms de manera indefinida
+      setInterval(createPetal, 400);
+    }
+
     $(document).ready(function () {
       $("#salute").text(salute);
       updateCountdown();
@@ -356,6 +422,8 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       getJourneyDaysAgo("met-days", new Date(2026, 0, 23)); // 24 Jan 2026
       getJourneyDaysAgo("step-days", new Date(2026, 1, 12)); // 13 Feb 2026
       getJourneyDaysAgo("official-days", new Date(2026, 1, 24)); // 25 Feb 2026
+
+      startSakuraShower();
       setInterval(updateCountdown, 1000);
       setInterval(updateTimePerspectives, 1000); // Actualiza las perspectivas cada minuto
     });

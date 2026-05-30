@@ -7,17 +7,16 @@
   --font-noto-sans-jp: "Noto Sans JP", sans-serif;
   --font-inter: "Inter", sans-serif;
 
-  --color-washi-paper: #FAF7F2;
---color-linen: #EEE8E1;
---color-ku-brown: #6B4F4F;
---color-ku-accent: #C9A99F;
---color-black-ink: #2B2825;
---color-black-ink: #2B2825;
-  --color-sakura-pink: #F6D9DB;
-  --color-kiro-yellow: #F3F6C7;
-  --color-ao-sky: #DCF0F7;
+  --color-washi-paper: #faf7f2;
+  --color-linen: #eee8e1;
+  --color-ku-brown: #6b4f4f;
+  --color-ku-accent: #c9a99f;
+  --color-black-ink: #2b2825;
+  --color-black-ink: #2b2825;
+  --color-sakura-pink: #f6d9db;
+  --color-kiro-yellow: #f3f6c7;
+  --color-ao-sky: #dcf0f7;
 }
-
 
 @layer components {
   .roboto-mono {
@@ -56,7 +55,6 @@
   }
 }
 
-
 @keyframes rotate {
   from {
     transform: rotate(0deg);
@@ -71,7 +69,8 @@
 }
 
 @keyframes dance {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(0deg) translateY(0);
   }
   25% {
@@ -99,29 +98,63 @@
 
 /* Weather Icons */
 @keyframes slow-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes drift {
-  0%, 100% { transform: translateX(-2px); }
-  50% { transform: translateX(2px); }
+  0%,
+  100% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
 }
 
 @keyframes flash {
-  0%, 90%, 100% { opacity: 1; filter: brightness(1); }
-  92%, 95% { opacity: 0.8; filter: brightness(2.3); }
+  0%,
+  90%,
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  92%,
+  95% {
+    opacity: 0.8;
+    filter: brightness(2.3);
+  }
 }
 
 @keyframes rain-drop {
-  0%, 100% { transform: translateY(-2px); opacity: 1; }
-  70% { transform: translateY(3px); }
+  0%,
+  100% {
+    transform: translateY(-2px);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(3px);
+  }
 }
 
-.animate-sun { animation: slow-spin 25s linear infinite; }
-.animate-cloud { animation: drift 4s ease-in-out infinite; }
-.animate-lightning { animation: flash 4s steps(4) infinite, rain-drop 2s infinite ease-in-out; }
-.animate-rain { animation: rain-drop 2s infinite ease-in-out; }
+.animate-sun {
+  animation: slow-spin 25s linear infinite;
+}
+.animate-cloud {
+  animation: drift 4s ease-in-out infinite;
+}
+.animate-lightning {
+  animation:
+    flash 4s steps(4) infinite,
+    rain-drop 2s infinite ease-in-out;
+}
+.animate-rain {
+  animation: rain-drop 2s infinite ease-in-out;
+}
 
 /* Heart */
 @keyframes heartbeat {
@@ -143,6 +176,49 @@
 }
 
 .animate-heartbeat {
-  display: inline-block; 
+  display: inline-block;
   animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* > Sakura Fall */
+#sakura-fall {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.sakura-petal {
+  position: absolute;
+  background: linear-gradient(135deg, #ffb7c5, #ff99b0);
+  border-radius: 99% 10% 99% 10%;
+  opacity: 0.8;
+  pointer-events: none;
+  transform-origin: left top;
+  animation:
+    fall linear infinite,
+    sway ease-in-out infinite;
+}
+
+@keyframes fall {
+  0% {
+    top: -20px;
+  }
+  100% {
+    top: 100%; 
+  }
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: translateX(0) rotateX(0deg) rotateY(0deg) rotateZ(15deg);
+  }
+  50% {
+    transform: translateX(80px) rotateX(180deg) rotateY(360deg) rotateZ(45deg);
+  }
 }
