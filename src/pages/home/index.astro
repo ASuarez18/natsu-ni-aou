@@ -24,7 +24,7 @@ const perspectiveDescStyle =
   "text-base text-ku-brown font-noto-sans-jp tracking-wide";
 // ? Journey together
 const journeyCardStyle =
-  "px-6 py-5 shadow-inner rounded-lg bg-stone-60 border bg-white border-stone-200/60 flex gap-2 items-center";
+  "w-[80%] lg:w-auto px-6 py-5 shadow-inner rounded-lg bg-stone-60 border bg-white border-stone-200/60 flex gap-2 items-center";
 const journeyCardHover =
   "hover:-translate-y-1.5 hover:scale-[1.05]  hover:inner-shadow hover:shadow-stone-400 transition-all duration-500";
 const journeyIconStyle = "bg-ku-accent/10 p-2 rounded-full";
@@ -37,9 +37,9 @@ const journeySpecialText = "font-semibold text-black-ink/80";
 ---
 
 <!-- flex flex-col items-center justify-center min-h-screen -->
-<Layout style="bg-[#F8F8F3]">
+<Layout style="bg-[#F8F8F3] flex flex-col min-h-screen">
   <div id="sakura-fall"></div>
-  <header class="w-full flex flex-row justify-end items-center px-10 py-3">
+  <header class="w-full flex flex-row justify-center lg:justify-end items-center px-10 py-3 mb-8">
     <!-- <h3
       id="salute"
       class="text-left font-noto-serif-jp text-4xl font-normal text-ku-brown "
@@ -61,16 +61,16 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       </h1>
       <div id="countdown-container" class="flex flex-col items-center my-6">
         <div
-          class="flex items-center gap-4 font-inter text-7xl font-light text-neutral-600 tracking-wider"
+          class="grid grid-cols-3 md:flex items-center gap-15 md:gap-4 font-inter text-7xl font-light text-neutral-600 tracking-wider"
         >
-          <div class="flex flex-col gap-2 items-center justify-center w-18">
+          <div class="flex flex-col gap-2 items-center justify-center w-20">
             <span id="cd-months" class="text-ku-brown">00</span>
             <span
               class="text-center text-lg font-normal text-neutral-500 tracking-wide font-noto-sans-jp"
               >Months</span
             >
           </div>
-          <div class="flex flex-col gap-2 items-center justify-center">
+          <div class="hidden md:flex flex-col gap-2 items-center justify-center">
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
@@ -81,7 +81,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
               >Weeks</span
             >
           </div>
-          <div class="flex flex-col gap-2 items-center justify-center">
+          <div class="hidden md:flex flex-col gap-2 items-center justify-center">
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
@@ -92,7 +92,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
               >Days</span
             >
           </div>
-          <div class="flex flex-col gap-2 items-center justify-center">
+          <div class="hidden md:flex flex-col gap-2 items-center justify-center">
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
@@ -103,7 +103,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
               >Hours</span
             >
           </div>
-          <div class="flex flex-col gap-2 items-center justify-center">
+          <div class="hidden md:flex flex-col gap-2 items-center justify-center">
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
@@ -114,7 +114,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
               >Minutes</span
             >
           </div>
-          <div class="flex flex-col gap-2 items-center justify-center">
+          <div class="hidden md:flex flex-col gap-2 items-center justify-center">
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
@@ -132,13 +132,13 @@ const journeySpecialText = "font-semibold text-black-ink/80";
     <!-- > Time perspectives -->
     <section id="time-perspectives" class="flex flex-col gap-5">
       <h2
-        class="text-center font-noto-sans-jp text-4xl font-normal text-ku-brown pl-4"
+        class="text-center font-noto-serif-jp text-4xl font-normal text-ku-brown pl-4"
       >
         Time perspectives
       </h2>
       <div
         id="time-perspectives-container"
-        class="flex items-center justify-center gap-6"
+        class="flex flex-wrap items-center justify-center gap-6"
       >
         <div
           id="week-perspective"
@@ -187,7 +187,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       </h2>
       <div
         id="journeys-container"
-        class="flex items-center justify-center gap-10 w-full px-4"
+        class="flex flex-col lg:flex-row  items-center justify-center gap-10 w-full px-4"
       >
         <!-- - First Met  -->
         <div id="first-met" class={`${journeyCardStyle} ${journeyCardHover}`}>
@@ -245,6 +245,9 @@ const journeySpecialText = "font-semibold text-black-ink/80";
     // ---------------------------------------------------------------------
     // 3 de Agosto de 2026, 19:45 de Vancouver -> 4 de Agosto, 02:45 UTC
     const targetDate = new Date(Date.UTC(2026, 7, 3, 2, 45, 0)); // 5 - 4
+
+    // console.log("Target Local:", targetDate.toLocaleString("en-US", { timeZone: "America/Vancouver" }));
+    // console.log("Target Local:", new Date().toLocaleString("en-US", { timeZone: "America/Vancouver" }));
 
     function getVancouverTime(date: Date) {
       return new Date(
@@ -336,7 +339,6 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       $("#hours-perspective p:first-child").text(totalHours.toLocaleString());
       $("#days-perspective p:first-child").text(totalDays.toLocaleString());
       $("#week-perspective p:first-child").text(totalWeeks.toLocaleString());
-      console.log("clcick");
     }
 
     function getJourneyDaysAgo(targetId: string, targetDate: Date) {
@@ -357,7 +359,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       const $petal = $('<div class="sakura-petal"></div>');
 
       // Valores aleatorios estéticos
-      const startLeft = Math.random() * $container.width();
+      const startLeft = Math.random() * $container.width()!;
       const size = Math.random() * 8 + 8; // Tamaños de 8px a 16px
       const fallDuration = Math.random() * 8 + 7; // Caída gentil de entre 7 y 15 segundos
       const swayDuration = Math.random() * 4 + 3; // Balanceo de entre 3 y 7 segundos
@@ -390,7 +392,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       for (let i = 0; i < 25; i++) {
         setTimeout(() => {
           const $petal = $('<div class="sakura-petal"></div>');
-          const startLeft = Math.random() * $("#sakura-fall").width();
+          const startLeft = Math.random() * $("#sakura-fall").width()!;
           const size = Math.random() * 8 + 8;
           const fallDuration = Math.random() * 8 + 7;
           const swayDuration = Math.random() * 4 + 3;
