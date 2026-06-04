@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../../public/logo.webp";
-import { Heart } from "@lucide/astro";
+import { Heart, X } from "@lucide/astro";
 import "../styles/global.css";
 
 const buttonStyle =
-  "flex flex-col gap-3 items-center align-middle w-55 py-5 rounded-3xl bg-transparent border-2 border-[#E5E5E5] group";
+  "flex flex-col gap-3 items-center align-middle w-[85%] md:w-55 py-2.5 md:py-5 rounded-3xl bg-transparent border-2 border-[#E5E5E5] group";
 const buttonHoverStyle =
   "hover:bg-[#f3f3f2] hover:cursor-pointer hover:-translate-y-1.5 transition-all ease-in-out duration-300";
 ---
@@ -18,31 +18,35 @@ const buttonHoverStyle =
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter...&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Natsu Ni Aou</title>
+    <title>夏に会おう</title>
   </head>
   <body
-    class="bg-[#F8F8F3] flex flex-col items-center justify-center min-h-screen"
+    class="bg-[#F8F8F3] flex flex-col items-center justify-center min-h-screen p-8 md:p-4 overflow-x-hidden relative"
   >
-    <figure>
-      <Image src={logo} alt="Hero Image" class="w-65 h-auto object-cover" />
+    <div id="sakura-fall"></div>
+
+    <figure class="z-20 text-center">
+      <Image src={logo} alt="Hero Image" class="w-65 h-auto object-cover mx-auto" />
       <h1
         class="text-center noto-serif-jp text-4xl font-medium text-[#805C5C] mt-10"
       >
-        Natsu Ni Aou
+        夏に会おう
       </h1>
     </figure>
+
     <h2
       id="question-login"
-      class="text-center mt-4 noto-sans-jp font-normal text-lg text-[#805C5C]"
+      class="text-center mt-4 noto-sans-jp font-normal text-lg text-[#805C5C] z-20"
     >
       Before crossing the bridge, tell me... who has arrived today?
     </h2>
-    <div id="who-is-btns" class="flex items-center gap-6 mt-6">
+
+    <div id="who-is-btns" class="flex flex-col md:flex-row items-center w-full md:w-auto gap-2 md:gap-6 mt-6 z-20">
       <button id="sa-btn" class={`${buttonStyle} ${buttonHoverStyle} user-btn`}
         ><span
           id="sakura-emoji"
@@ -50,7 +54,7 @@ const buttonHoverStyle =
           >🌸</span
         ><span class="noto-sans-jp text-[#C48B91]">I'm Sa-chan</span></button
       >
-      <Heart color="#805C5C" fill="#805C5C" size={48} stroke-width={1} />
+      <Heart color="#805C5C" fill="#805C5C" size={48} stroke-width={1} class="z-20" />
       <button id="ku-btn" class={`${buttonStyle} ${buttonHoverStyle} user-btn`}
         ><span
           id="ku-emoji"
@@ -59,18 +63,20 @@ const buttonHoverStyle =
         ><span class="noto-sans-jp text-[#805C5C]">I'm Ku-chan</span></button
       >
     </div>
+    
     <div
       id="secret-password-container"
-      class="flex flex-col w-115 align-middle items-center mt-8 transition-all duration-700 ease-in-out opacity-0 translate-y-4 pointer-events-none"
+      class="flex flex-col w-full md:w-115 align-middle items-center mt-4 md:mt-8 transition-all duration-700 ease-in-out opacity-0 translate-y-4 pointer-events-none z-20"
     >
-      <h3 class="font-normal noto-sans-jp text-[#805C5C] text-lg">
-        Our secret answer...
+      <hr class="block md:hidden border-stone-300/60 w-full mx-auto mt-0 mb-4">
+      <h3 class="font-normal font-noto-sans-jp text-[#805C5C] text-xl">
+        What would be the name of our girl?
       </h3>
       <input
         type="password"
         name="secret"
         id="secret-password-inp"
-        class="border-2 border-[#E5E5E5] w-full rounded-lg py-3 mt-4 text-center text-[#805C5C] outline-[#E5E5E5] tracking-[0.5em]"
+        class="border-2 border-[#E5E5E5] w-full rounded-lg py-3 mt-4 text-center text-[#805C5C] outline-[#E5E5E5] tracking-[0.5em] bg-white/80 backdrop-blur-xs"
         placeholder="•••••••••••••••"
       />
       <button
@@ -79,17 +85,42 @@ const buttonHoverStyle =
         class="w-full py-3 rounded-xl noto-serif-jp text-lg mt-6 border-2 text-[#805C5C] border-[#E5E5E5] bg-transparent hover:bg-[#F3F6C7] hover:border-[#F3F6C7] shadow hover:cursor-pointer hover:scale-105 transition-all hover:font-semibold ease-in-out duration-300"
         >Enter our world</button
       >
-      <!-- <p>A place where time stands still for us</p> -->
+    </div>
+
+    <div
+      id="error-toast"
+      class="fixed top-5 md:top-auto md:bottom-5 right-5 md:right-10 z-50 pointer-events-none opacity-0 translate-y-4 transition-all duration-500 ease-out bg-[#F8F8F3] border border-stone-200/80 shadow-xl rounded-2xl p-4 w-[calc(100%-2.5rem)] max-w-sm flex gap-3 items-start"
+    >
+      <div  class="text-2xl mt-0.5 animate-droop">😔</div>
+      <div class="flex-1">
+        <h4 class="font-medium font-noto-serif-jp text-sm text-[#805C5C]">
+          ¡Opps!
+        </h4>
+        <p id="error-toast-msg" class="font-noto-sans-jp text-stone-500 text-xs mt-0.5 leading-relaxed">
+          That's not the correct answer...
+        </p>
+        <div id="toast-timer-container" class="text-[10px] text-stone-400 mt-2 font-noto-sans-jp flex items-center gap-1">
+          Disapearing in <span id="toast-countdown" class="font-semibold text-[#805C5C]">3</span>s...
+        </div>
+      </div>
+      <button
+        id="close-toast-btn"
+        class="text-stone-400 hover:text-[#805C5C] p-1 rounded-full hover:bg-stone-200/50 cursor-pointer pointer-events-auto transition-colors"
+      >
+        <X size={14} />
+      </button>
     </div>
   </body>
+
   <script>
     import $ from "jquery";
     let selectedUser: string = "";
     let secretPassword: string = "";
+    let toastTimer: number;
 
     $(document).ready(function () {
       const savedUser = localStorage.getItem("user_session");
-      if (savedUser) { // User has a saved session, redirect to home
+      if (savedUser) {
         window.location.href = "/home";
         return;
       }
@@ -99,14 +130,14 @@ const buttonHoverStyle =
       const saEmoji = $("#sakura-emoji");
       const kuEmoji = $("#ku-emoji");
 
-      const secretPasswordInput = $("#secret-password-inp");
-      const enterWorldBtn = $("#enter-world-btn");
+      // Selectores Toast
+      const $toast = $("#error-toast");
+      const $closeToastBtn = $("#close-toast-btn");
+      const $toastCountdown = $("#toast-countdown");
 
       // ? Styles
-      const saActive =
-        "!bg-[#F6D9DB] !-translate-y-1.5 !border-[#F6D9DB] shadow";
-      const kuActive =
-        "!bg-[#B7958B] !-translate-y-1.5 !border-[#B7958B] shadow";
+      const saActive = "!bg-[#F6D9DB] !-translate-y-1.5 !border-[#F6D9DB] shadow";
+      const kuActive = "!bg-[#B7958B] !-translate-y-1.5 !border-[#B7958B] shadow";
 
       $(".user-btn").click(function () {
         saBtn.removeClass(saActive);
@@ -124,28 +155,124 @@ const buttonHoverStyle =
           kuEmoji.addClass("scale-110 ku-dance");
         }
 
-        // Appear secret password input
         $("#secret-password-container")
           .removeClass("opacity-0 translate-y-4 pointer-events-none")
           .addClass("opacity-100 translate-y-0 pointer-events-auto");
       });
 
-      $("#enter-world-btn").click(function () {
-        secretPassword = $("#secret-password-inp").val();
+      /**
+       * @function triggerErrorToast
+        Show an error toast with a countdown timer. If a toast is already active, it resets the timer and updates the message.
+       * @param message - The error message to display in the toast.
+       */
+      function triggerErrorToast(message: string) {
+        if (toastTimer) clearInterval(toastTimer);
 
-        if (secretPassword === "123") {
+        $("#error-toast-msg").text(message);
+        let timeLeft = 5;
+        $toastCountdown.text(timeLeft);
+
+        $toast
+          .removeClass("opacity-0 translate-y-4 pointer-events-none")
+          .addClass("opacity-100 translate-y-0 pointer-events-auto");
+
+        toastTimer = setInterval(() => {
+          timeLeft--;
+          $toastCountdown.text(timeLeft);
+
+          if (timeLeft <= 0) {
+            dismissToast();
+          }
+        }, 1000);
+      }
+
+      function dismissToast() {
+        if (toastTimer) clearInterval(toastTimer);
+        $toast
+          .removeClass("opacity-100 translate-y-0 pointer-events-auto")
+          .addClass("opacity-0 translate-y-4 pointer-events-none");
+      }
+
+      $closeToastBtn.click(dismissToast);
+
+      /**
+       * @function createPetal
+        Creates a single sakura petal with random properties and appends it to the #sakura-fall container. 
+        The petal is removed from the DOM after its animation completes.
+       */
+      function createPetal() {
+        const $container = $("#sakura-fall");
+        if ($container.length === 0) return;
+
+        const containerWidth = $container.width()!;
+        const startLeft = Math.random() * containerWidth;
+        const size = Math.random() * 6 + 8;
+        const fallDuration = Math.random() * 4 + 4; // Entre 4s y 8s en fixed alto viewport
+        const swayDuration = Math.random() * 3 + 2;
+        const delay = Math.random() * 1.5;
+
+        const $petal = $('<div class="sakura-petal"></div>');
+
+        $petal.css({
+          left: `${startLeft}px`,
+          width: `${size}px`,
+          height: `${size * 0.75}px`,
+          animationName: 'fall, sway',
+          animationDuration: `${fallDuration}s, ${swayDuration}s`,
+          animationDelay: `${delay}s`,
+          opacity: Math.random() * 0.3 + 0.6
+        });
+
+        $container.append($petal);
+
+        // Eliminación estricta del DOM al terminar la caída
+        setTimeout(() => { $petal.remove(); }, (fallDuration + delay) * 1000);
+      }
+
+      function startSakuraShower() {
+        const $container = $("#sakura-fall");
+        if ($container.length === 0) return;
+
+        const containerWidth = $container.width()!;
+
+        // Generación de pétalos pre-renderizados iniciales
+        for (let i = 0; i < 15; i++) {
+          setTimeout(() => {
+            const $petal = $('<div class="sakura-petal"></div>');
+            const startLeft = Math.random() * containerWidth;
+            const size = Math.random() * 6 + 8;
+            const fallDuration = Math.random() * 4 + 4;
+            const swayDuration = Math.random() * 3 + 2;
+            const randomTop = Math.random() * 90;
+
+            $petal.css({
+              left: `${startLeft}px`,
+              width: `${size}px`,
+              height: `${size * 0.75}px`,
+              animationName: 'fall, sway',
+              animationDuration: `${fallDuration}s, ${swayDuration}s`,
+              top: `${randomTop}%`
+            });
+            $container.append($petal);
+            setTimeout(() => $petal.remove(), fallDuration * 1000);
+          }, Math.random() * 2000);
+        }
+
+        // Loop continuo seguro
+        setInterval(createPetal, 600);
+      }
+
+      startSakuraShower();
+
+      $("#enter-world-btn").click(function () {
+        secretPassword = ($("#secret-password-inp").val() as string) ?? "";
+
+        if (secretPassword === import.meta.env.PUBLIC_PASSWORD) {
           const name = selectedUser === "sa" ? "Sa-chan" : "Ku-chan";
           localStorage.setItem('user_session', name);
-          // TODO: Change alert to a custom modal with better design with time to read the message and a cute design
-          alert(
-            "Welcome, " +
-              (selectedUser === "sa" ? "Sa-chan" : "Ku-chan") +
-              "! ✨",
-          );
           window.location.href = "/home";
         } else {
-          // TODO: Change alert to a custom modal 
-          alert("Esa no es nuestra respuesta secreta... 🌸🐻");
+          triggerErrorToast("That's not the correct answer... 🌸🐻");
         }
       });
     });

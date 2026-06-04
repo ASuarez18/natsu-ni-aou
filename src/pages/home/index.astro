@@ -8,6 +8,7 @@ import {
   HandHeart,
   Heart,
   Cake,
+  X
 } from "@lucide/astro";
 
 import Image from "astro/components/Image.astro";
@@ -37,9 +38,11 @@ const journeySpecialText = "font-semibold text-black-ink/80";
 ---
 
 <!-- flex flex-col items-center justify-center min-h-screen -->
-<Layout style="bg-[#F8F8F3] flex flex-col min-h-screen">
+<Layout style="bg-[#F8F8F3] flex flex-col min-h-screen relative">
   <div id="sakura-fall"></div>
-  <header class="w-full flex flex-row justify-center lg:justify-end items-center px-10 py-3 mb-8">
+  <header
+    class="w-full flex flex-row justify-center lg:justify-end items-center px-10 py-3 mb-8"
+  >
     <!-- <h3
       id="salute"
       class="text-left font-noto-serif-jp text-4xl font-normal text-ku-brown "
@@ -70,7 +73,9 @@ const journeySpecialText = "font-semibold text-black-ink/80";
               >Months</span
             >
           </div>
-          <div class="hidden md:flex flex-col gap-2 items-center justify-center">
+          <div
+            class="hidden md:flex flex-col gap-2 items-center justify-center"
+          >
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
@@ -81,7 +86,9 @@ const journeySpecialText = "font-semibold text-black-ink/80";
               >Weeks</span
             >
           </div>
-          <div class="hidden md:flex flex-col gap-2 items-center justify-center">
+          <div
+            class="hidden md:flex flex-col gap-2 items-center justify-center"
+          >
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
@@ -92,7 +99,9 @@ const journeySpecialText = "font-semibold text-black-ink/80";
               >Days</span
             >
           </div>
-          <div class="hidden md:flex flex-col gap-2 items-center justify-center">
+          <div
+            class="hidden md:flex flex-col gap-2 items-center justify-center"
+          >
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
@@ -103,7 +112,9 @@ const journeySpecialText = "font-semibold text-black-ink/80";
               >Hours</span
             >
           </div>
-          <div class="hidden md:flex flex-col gap-2 items-center justify-center">
+          <div
+            class="hidden md:flex flex-col gap-2 items-center justify-center"
+          >
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
@@ -114,7 +125,9 @@ const journeySpecialText = "font-semibold text-black-ink/80";
               >Minutes</span
             >
           </div>
-          <div class="hidden md:flex flex-col gap-2 items-center justify-center">
+          <div
+            class="hidden md:flex flex-col gap-2 items-center justify-center"
+          >
             <span class="text-neutral-500 font-semibold text-4xl">:</span>
             <div class="h-8"></div>
           </div>
@@ -187,7 +200,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       </h2>
       <div
         id="journeys-container"
-        class="flex flex-col lg:flex-row  items-center justify-center gap-10 w-full px-4"
+        class="flex flex-col md:flex-row items-center justify-center gap-10 w-full px-4"
       >
         <!-- - First Met  -->
         <div id="first-met" class={`${journeyCardStyle} ${journeyCardHover}`}>
@@ -233,9 +246,41 @@ const journeySpecialText = "font-semibold text-black-ink/80";
     <section id="" class="mb-10"></section>
   </main>
 
+  <div
+    id="welcome-toast"
+    class="fixed bottom-5 right-5 md:right-10 z-50 pointer-events-none opacity-0 translate-y-4 transition-all duration-500 ease-out bg-[#F8F8F3] border border-stone-200/80 shadow-xl rounded-2xl p-4 w-[calc(100%-2.5rem)] max-w-sm flex gap-3 items-start"
+  >
+    <div class="text-2xl mt-0.5 animate-bounce duration-1000">✨</div>
+    <div class="flex-1">
+      <h4 class="font-medium font-noto-serif-jp text-base text-[#805C5C]">
+        また会えて、本当にうれしいよ…
+      </h4>
+      <p
+        id="welcome-toast-msg"
+        class="font-noto-sans-jp text-stone-500 text-sm mt-0.5 leading-relaxed"
+      >
+        It's so good to see you again...
+      </p>
+      <div class="text-[15px] text-stone-400 mt-2 font-noto-sans-jp">
+        二人のために、時間が止まる場所 <span class="animate-heartbeat">❤️</span>
+      </div>
+    </div>
+    <button
+      id="close-welcome-btn"
+      class="text-stone-400 hover:text-[#805C5C] p-1 rounded-full hover:bg-stone-200/50 cursor-pointer pointer-events-auto transition-colors"
+    >
+      <X id="close-welcome-toast-btn" size={14} />
+    </button>
+  </div>
   <script>
     import $ from "jquery";
     const userName = localStorage.getItem("user_session");
+
+    // Check for user session, if not exist, set default to "Sa-chan"
+    if (!userName) {
+      window.location.href = "/"; // Redirect to login page if no session
+    }
+
     const hour = new Date().getHours();
     let salute = `Good Morning, ${userName}!`;
     if (hour >= 12 && hour < 18) salute = `Good Afternoon, ${userName}!`;
@@ -245,6 +290,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
     // ---------------------------------------------------------------------
     // 3 de Agosto de 2026, 19:45 de Vancouver -> 4 de Agosto, 02:45 UTC
     const targetDate = new Date(Date.UTC(2026, 7, 3, 2, 45, 0)); // 5 - 4
+    let welcomeTimer: number;
 
     // console.log("Target Local:", targetDate.toLocaleString("en-US", { timeZone: "America/Vancouver" }));
     // console.log("Target Local:", new Date().toLocaleString("en-US", { timeZone: "America/Vancouver" }));
@@ -351,7 +397,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       $(`#${targetId}`).text(diffDays);
     }
 
-    // --- ANIMACIÓN SAKURA FALL ---
+    // --- SAKURA FALL ---
     function createPetal() {
       const $container = $("#sakura-fall");
       if ($container.length === 0) return;
@@ -377,7 +423,6 @@ const journeySpecialText = "font-semibold text-black-ink/80";
 
       $container.append($petal);
 
-      // Limpieza de memoria: remueve el nodo del DOM cuando termina su viaje
       setTimeout(
         () => {
           $petal.remove();
@@ -417,6 +462,29 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       setInterval(createPetal, 400);
     }
 
+    function showWelcomeToast() {
+      const $toast = $("#welcome-toast");
+
+      $("#welcome-toast-msg").text(`${userName === "Sa-chan" ? "さーちゃん、おかえりなさい！" : "くーちゃん、おかえりなさい！"}`);
+
+      $toast
+        .removeClass("opacity-0 translate-y-4 pointer-events-none")
+        .addClass("opacity-100 translate-y-0 pointer-events-auto");
+
+      welcomeTimer = setTimeout(() => {
+        dismissWelcomeToast();
+      }, 5000);
+    }
+
+    function dismissWelcomeToast() {
+      if (welcomeTimer) clearTimeout(welcomeTimer);
+      $("#welcome-toast")
+        .removeClass("opacity-100 translate-y-0 pointer-events-auto")
+        .addClass("opacity-0 translate-y-4 pointer-events-none");
+    }
+
+    $("#close-welcome-toast-btn").on("click", dismissWelcomeToast);
+
     $(document).ready(function () {
       $("#salute").text(salute);
       updateCountdown();
@@ -425,6 +493,7 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       getJourneyDaysAgo("step-days", new Date(2026, 1, 12)); // 13 Feb 2026
       getJourneyDaysAgo("official-days", new Date(2026, 1, 24)); // 25 Feb 2026
 
+      showWelcomeToast();
       startSakuraShower();
       setInterval(updateCountdown, 1000);
       setInterval(updateTimePerspectives, 1000); // Actualiza las perspectivas cada minuto
