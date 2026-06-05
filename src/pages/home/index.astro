@@ -8,7 +8,7 @@ import {
   HandHeart,
   Heart,
   Cake,
-  X
+  X,
 } from "@lucide/astro";
 
 import Image from "astro/components/Image.astro";
@@ -296,8 +296,25 @@ const journeySpecialText = "font-semibold text-black-ink/80";
     // console.log("Target Local:", new Date().toLocaleString("en-US", { timeZone: "America/Vancouver" }));
 
     function getVancouverTime(date: Date) {
+      const vancouverString = date.toLocaleString("en-US", {
+        timeZone: "America/Vancouver",
+        hour12: false,
+      });
+
+      // Separamos "MM/DD/YYYY" y "HH:MM:SS"
+      const [datePart, timePart] = vancouverString.split(", ");
+      const [month, day, year] = datePart.split("/");
+      const [hour, minute, second] = timePart.split(":");
+
+      // Devolvemos una instancia de Date hecha con números puros.
+      // Al restar 1 al mes, neutralizamos por completo el sistema de base 0 de JS.
       return new Date(
-        date.toLocaleString("en-US", { timeZone: "America/Vancouver" }),
+        Number(year),
+        Number(month) - 1,
+        Number(day),
+        Number(hour),
+        Number(minute),
+        Number(second),
       );
     }
 
@@ -387,13 +404,38 @@ const journeySpecialText = "font-semibold text-black-ink/80";
       $("#week-perspective p:first-child").text(totalWeeks.toLocaleString());
     }
 
-    function getJourneyDaysAgo(targetId: string, targetDate: Date) {
+    function getJourneyDaysAgo(targetId: string, eventDate: Date) {
+      // 1. Obtenemos la fecha actual con el "reloj" de Vancouver
       const nowVancouver = getVancouverTime(new Date());
-      const targetVancouver = getVancouverTime(targetDate);
-      const diffTime = Math.abs(
-        targetVancouver.getTime() - nowVancouver.getTime(),
+
+      // 2. CREAMOS FECHAS "LIMPIAS" (Solo Año, Mes y Día)
+      // Al poner 0, 0, 0 forzamos que ambas fechas se comparen desde la medianoche exacta.
+      // Esto elimina el desfase de horas que causaba el error en Japón.
+      const today = new Date(
+        nowVancouver.getFullYear(),
+        nowVancouver.getMonth(),
+        nowVancouver.getDate(),
+        0,
+        0,
+        0,
       );
-      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+      const past = new Date(
+        eventDate.getFullYear(),
+        eventDate.getMonth(),
+        eventDate.getDate(),
+        0,
+        0,
+        0,
+      );
+
+      // 3. Calculamos la diferencia absoluta
+      const diffTime = Math.abs(today.getTime() - past.getTime());
+
+      // 4. Usamos Math.round en lugar de floor para evitar errores de precisión
+      // infinitesimales en el cálculo de milisegundos.
+      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+
       $(`#${targetId}`).text(diffDays);
     }
 
@@ -465,7 +507,9 @@ const journeySpecialText = "font-semibold text-black-ink/80";
     function showWelcomeToast() {
       const $toast = $("#welcome-toast");
 
-      $("#welcome-toast-msg").text(`${userName === "Sa-chan" ? "さーちゃん、おかえりなさい！" : "くーちゃん、おかえりなさい！"}`);
+      $("#welcome-toast-msg").text(
+        `${userName === "Sa-chan" ? "さーちゃん、おかえりなさい！" : "くーちゃん、おかえりなさい！"}`,
+      );
 
       $toast
         .removeClass("opacity-0 translate-y-4 pointer-events-none")
